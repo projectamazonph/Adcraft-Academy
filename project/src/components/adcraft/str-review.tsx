@@ -50,7 +50,7 @@ export function StrReview({ onBack }: { onBack: () => void }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5 }}
       >
         <Card className="border-rose-500/20 bg-gradient-to-br from-rose-500/5 via-card to-card overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />

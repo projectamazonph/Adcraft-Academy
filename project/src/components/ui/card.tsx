@@ -1,17 +1,16 @@
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
 
+// ponytail: Double-Bezel card — outer shell + inner core
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
-      data-slot="card"
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        className
-      )}
-      {...props}
-    />
+    <div className={cn("card-bezel-dark", className)}>
+      <div
+        data-slot="card"
+        className="card-core text-card-foreground flex flex-col gap-6 py-6"
+        {...props}
+      />
+    </div>
   )
 }
 
@@ -75,7 +74,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+      className={cn("flex items-center px-6 [.border-b]:pb-6", className)}
       {...props}
     />
   )

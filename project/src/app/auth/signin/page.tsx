@@ -63,21 +63,25 @@ function SignInForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-[100dvh] flex items-center justify-center bg-background p-4 relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/3 rounded-full blur-3xl" />
+      </div>
       <div className="w-full max-w-md space-y-8">
         {/* Logo & branding */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/15 border border-primary/20">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 shadow-[0_0_30px_rgba(100,255,150,0.1)]">
             <Zap className="h-7 w-7 text-primary" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Welcome to AdCraft</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome to AdCraft</h1>
           <p className="text-sm text-muted-foreground">
             Sign in to continue your Amazon PPC training
           </p>
         </div>
 
         {/* Sign-in form */}
-        <Card className="border-border">
+        <Card>
           <CardContent className="pt-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (

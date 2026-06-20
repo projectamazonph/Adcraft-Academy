@@ -439,7 +439,7 @@ function ModulesView({ onOpenLesson }: { onOpenLesson: (lesson: { moduleNumber: 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">Learning Modules</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Learning Modules</h2>
         <p className="text-sm text-muted-foreground mt-1">
           Complete modules in order to unlock simulations and advance your PPC expertise
         </p>
@@ -619,7 +619,7 @@ function SimulationsView({ onLaunchSim }: { onLaunchSim: (sim: string | null) =>
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">Simulations</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Simulations</h2>
         <p className="text-sm text-muted-foreground mt-1">
           Hands-on PPC practice scenarios — complete modules to unlock each simulation
         </p>

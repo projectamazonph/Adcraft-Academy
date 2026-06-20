@@ -148,7 +148,7 @@ function ScenarioCard() {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.3 }}
           className="space-y-4"
         >
           {/* Scenario header */}

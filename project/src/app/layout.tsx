@@ -60,6 +60,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <ErrorBoundary>
+          <div className="noise-overlay" />
             {children}
           </ErrorBoundary>
         </AuthProvider>

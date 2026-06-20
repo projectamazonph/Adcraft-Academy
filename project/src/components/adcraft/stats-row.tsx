@@ -107,7 +107,7 @@ export function StatsRow({
             key={stat.label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: index * 0.1 }}
             className={`relative overflow-hidden rounded-xl border ${colors.border} ${colors.bg} backdrop-blur-sm p-4`}
           >
             <div className="flex items-start justify-between">

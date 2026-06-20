@@ -86,7 +86,7 @@ function ScoreCircle({ score }: { score: number }) {
           strokeDasharray={circumference}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: circumference - progress }}
-          transition={{ duration: 1.5, ease: [0.33, 1, 0.68, 1] }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  1.5, ease: [0.33, 1, 0.68, 1] }}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -179,7 +179,7 @@ function CriterionCard({ result, index }: { result: CriterionResult; index: numb
             className={cn('h-full rounded-full', scoreBarColor)}
             initial={{ width: 0 }}
             animate={{ width: `${result.score}%` }}
-            transition={{ duration: 0.8, delay: 0.5 + index * 0.1 }}
+            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.8, delay: 0.5 + index * 0.1 }}
           />
         </div>
 
@@ -190,7 +190,7 @@ function CriterionCard({ result, index }: { result: CriterionResult; index: numb
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.2 }}
               className="overflow-hidden"
             >
               <div className="mt-3 pt-3 border-t border-border/50">
@@ -232,7 +232,7 @@ export function CampaignScoring() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5 }}
       >
         <Card className="border-emerald-500/20 bg-gradient-to-br from-emerald-500/5 via-card to-card">
           <CardContent className="py-8 flex flex-col items-center gap-4">

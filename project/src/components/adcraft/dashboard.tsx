@@ -98,7 +98,7 @@ export function Dashboard({ onNavigate, xpOverride, levelOverride }: DashboardPr
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5 }}
       >
         <Card className="relative overflow-hidden border-primary/20 bg-gradient-to-br from-primary/8 via-card to-card">
           {/* Decorative background elements */}
@@ -172,7 +172,7 @@ export function Dashboard({ onNavigate, xpOverride, levelOverride }: DashboardPr
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.6 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: 0.6 }}
         className="space-y-3"
       >
         <h2 className="text-lg font-semibold">Quick Actions</h2>

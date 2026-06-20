@@ -122,7 +122,7 @@ function SimulationCard({
     <motion.div
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: 0.3 + index * 0.1 }}
       whileHover={!isLocked ? { y: -3, transition: { duration: 0.2 } } : {}}
       className="group relative"
     >

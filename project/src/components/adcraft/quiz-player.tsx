@@ -245,7 +245,7 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4 }}
         >
           <Card className="border-primary/20 overflow-hidden">
             <div className="bg-gradient-to-br from-primary/8 via-card to-card px-6 py-8 text-center">
@@ -365,7 +365,7 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.2 }}
           >
             <Card>
               <CardContent className="p-6 space-y-6">
@@ -519,7 +519,7 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, type: 'spring' }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5, type: 'spring' }}
         >
           <Card className={cn('overflow-hidden', scoreBorder)}>
             <div className={cn('px-6 py-8 text-center', scoreBg)}>

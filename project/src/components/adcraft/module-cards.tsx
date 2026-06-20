@@ -192,7 +192,7 @@ function ModuleCard({ module, index, progress }: { module: Module; index: number
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
+      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: index * 0.08 }}
       whileHover={!isLocked ? { y: -2, transition: { duration: 0.2 } } : {}}
       className={cn(
         'group relative',
@@ -264,7 +264,7 @@ function ModuleCard({ module, index, progress }: { module: Module; index: number
                 className={cn('h-full rounded-full', colors.text === 'text-emerald-400' ? 'bg-emerald-400' : colors.text === 'text-sky-400' ? 'bg-sky-400' : colors.text === 'text-amber-400' ? 'bg-amber-400' : colors.text === 'text-rose-400' ? 'bg-rose-400' : 'bg-violet-400')}
                 initial={{ width: 0 }}
                 animate={{ width: `${progressPercent}%` }}
-                transition={{ duration: 0.8, delay: 0.3 + index * 0.08, ease: 'easeOut' }}
+                transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.8, delay: 0.3 + index * 0.08, ease: 'easeOut' }}
               />
             </div>
           </div>

@@ -58,7 +58,7 @@ export function XpProgress({
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-primary via-emerald-400 to-primary"
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  1.2, ease: 'easeOut' }}
         />
         {size === 'lg' && percentage > 10 && (
           <div className="absolute inset-0 shimmer rounded-full" />
