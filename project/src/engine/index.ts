@@ -32,16 +32,13 @@ export type {
   CampaignKeyword,
   CampaignStructure,
   SimProduct,
-  CampaignBuilderCriteria,
   CriterionResult,
   CampaignBuilderEvaluation,
   BidScenario,
-  BidMarketContext,
   BidDecision,
   BidDecisionEvaluation,
   BidElevatorEvaluation,
   SimulationType,
-  SimulationDifficulty,
   SimulationContext,
   SimulationState,
   UserAction,
@@ -51,7 +48,6 @@ export type {
   ValidationResult,
   ValidationError,
   ValidationWarning,
-  SimulationEvaluation,
 } from './types';
 
 

@@ -463,8 +463,6 @@ export type SimulationType = 'campaign-builder' | 'bid-elevator' | 'str-triage-a
 /**
  * Simulation difficulty levels.
  */
-export type SimulationDifficulty = 'beginner' | 'intermediate' | 'advanced';
-
 /**
  * The state of a running simulation.
  * This is what gets persisted as JSONB in the database.
@@ -555,14 +553,6 @@ export interface ValidationWarning {
   message: string;
   code: string;
 }
-
-/**
- * Union type for all possible evaluation results.
- */
-export type SimulationEvaluation =
-  | CampaignBuilderEvaluation
-  | BidElevatorEvaluation
-  | StrTriageEvaluation;
 
 // ============================================================================
 // XP & LEVEL SYSTEM
