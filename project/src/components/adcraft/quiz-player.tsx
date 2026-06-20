@@ -34,6 +34,9 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { getMistakeAnalysis } from '@/app/actions/mistake-analysis';
+import { MistakeReplay } from '@/components/adcraft/mistake-replay';
+import type { MistakeAnalysisResult } from '@/app/actions/mistake-analysis';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
@@ -75,6 +78,8 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
     xpEarned: number;
     passed: boolean;
     attemptNumber: number;
+    attemptId: string;
+  } | null>(null);
   } | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -163,6 +168,7 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
           totalQuestions: res.data.totalQuestions,
           xpEarned: res.data.xpEarned,
           passed: res.data.passed,
+          attemptId: res.data.attemptId,
           attemptNumber: res.data.attemptNumber,
         });
         setPhase('submitted');
@@ -186,6 +192,18 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
   // Retry quiz
   const handleRetry = useCallback(() => {
     startQuiz();
+  const handleReviewMistakes = useCallback(async (attemptId: string) => {
+    setLoadingMistakeAnalysis(true);
+    try {
+      const result = await getMistakeAnalysis(attemptId);
+      if (result.success && result.data) {
+        setMistakeAnalysis(result.data);
+        setShowMistakeReview(true);
+      }
+    } finally {
+      setLoadingMistakeAnalysis(false);
+    }
+  }, []);
   }, [startQuiz]);
 
   // Format seconds as mm:ss
@@ -566,6 +584,20 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
                 <RotateCcw className="h-3.5 w-3.5" />
                 {submitData.passed ? 'Retake Quiz' : 'Try Again'}
               </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                className="gap-2"
+                onClick={() => handleReviewMistakes(submitData.attemptId)}
+                disabled={loadingMistakeAnalysis}
+              >
+                {loadingMistakeAnalysis ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <HelpCircle className="h-3.5 w-3.5" />
+                )}
+                Review Answers
+              </Button>
               {!submitData.passed && (
                 <Button size="sm" className="gap-2" onClick={onBack}>
                   Review Lessons
@@ -639,7 +671,18 @@ export function QuizPlayer({ moduleNumber, onBack, onComplete }: QuizPlayerProps
     );
   }
 
-  return null;
+  return (
+    <>
+      <AnimatePresence>
+        {showMistakeReview && mistakeAnalysis && (
+          <MistakeReplay
+            analysis={mistakeAnalysis}
+            onClose={() => setShowMistakeReview(false)}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
 
 // ============================================================================

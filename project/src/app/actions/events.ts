@@ -10,7 +10,8 @@ export type EventType =
   | 'lesson_started' | 'lesson_completed'
   | 'quiz_started' | 'quiz_completed'
   | 'simulation_started' | 'simulation_graded'
-  | 'mentor_chat';
+  | 'mentor_chat'
+  | 'mistake_review';
 
 export async function trackEvent(
   eventType: EventType,
