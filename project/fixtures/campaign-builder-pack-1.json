@@ -1,0 +1,346 @@
+{
+  "packId": "campaign-builder-pack-1",
+  "category": "Kitchen Gadgets",
+  "productContext": {
+    "asin": "B0EXAMPLE01",
+    "title": "Premium Garlic Press - Heavy Duty Stainless Steel Mincer with Soft Grip Handle",
+    "category": "Kitchen & Dining > Kitchen Utensils & Gadgets > Garlic Presses",
+    "price": 29.99,
+    "margin": 0.35,
+    "averageSpend": 45.00,
+    "averageSales": 180.00,
+    "averageOrders": 8
+  },
+  "thresholds": {
+    "acosTarget": 0.25,
+    "tacosTarget": 0.12,
+    "ctrMinimum": 0.003,
+    "conversionRateMinimum": 0.08,
+    "cpcMaximum": 2.50,
+    "roasMinimum": 3.0
+  },
+  "availableProducts": [
+    {
+      "asin": "B0EXAMPLE01",
+      "title": "Premium Garlic Press - Heavy Duty Stainless Steel Mincer with Soft Grip Handle",
+      "category": "Kitchen & Dining",
+      "price": 29.99,
+      "margin": 0.35,
+      "averageSpend": 45.00,
+      "averageSales": 180.00,
+      "averageOrders": 8
+    },
+    {
+      "asin": "B0EXAMPLE02",
+      "title": "Chef's Citrus Juicer - Handheld Lemon Squeezer with Enamel Coating",
+      "category": "Kitchen & Dining",
+      "price": 19.99,
+      "margin": 0.40,
+      "averageSpend": 30.00,
+      "averageSales": 120.00,
+      "averageOrders": 7
+    },
+    {
+      "asin": "B0EXAMPLE03",
+      "title": "Multi-Blade Herb Scissors - 5-Blade Kitchen Shears with Cleaning Brush",
+      "category": "Kitchen & Dining",
+      "price": 14.99,
+      "margin": 0.45,
+      "averageSpend": 22.00,
+      "averageSales": 95.00,
+      "averageOrders": 8
+    }
+  ],
+  "suggestedKeywords": [
+    {
+      "id": "kw-001",
+      "text": "garlic press",
+      "matchType": "broad",
+      "suggestedBid": 1.25,
+      "searchVolume": "high",
+      "competition": "high",
+      "relevanceScore": 0.95
+    },
+    {
+      "id": "kw-002",
+      "text": "garlic press",
+      "matchType": "exact",
+      "suggestedBid": 1.50,
+      "searchVolume": "high",
+      "competition": "high",
+      "relevanceScore": 0.95
+    },
+    {
+      "id": "kw-003",
+      "text": "garlic press stainless steel",
+      "matchType": "phrase",
+      "suggestedBid": 0.95,
+      "searchVolume": "medium",
+      "competition": "medium",
+      "relevanceScore": 0.90
+    },
+    {
+      "id": "kw-004",
+      "text": "heavy duty garlic press",
+      "matchType": "exact",
+      "suggestedBid": 0.85,
+      "searchVolume": "medium",
+      "competition": "medium",
+      "relevanceScore": 0.92
+    },
+    {
+      "id": "kw-005",
+      "text": "garlic mincer",
+      "matchType": "broad",
+      "suggestedBid": 0.75,
+      "searchVolume": "medium",
+      "competition": "medium",
+      "relevanceScore": 0.85
+    },
+    {
+      "id": "kw-006",
+      "text": "kitchen gadgets",
+      "matchType": "broad",
+      "suggestedBid": 1.80,
+      "searchVolume": "high",
+      "competition": "high",
+      "relevanceScore": 0.40
+    },
+    {
+      "id": "kw-007",
+      "text": "lemon squeezer",
+      "matchType": "exact",
+      "suggestedBid": 0.65,
+      "searchVolume": "medium",
+      "competition": "low",
+      "relevanceScore": 0.30
+    },
+    {
+      "id": "kw-008",
+      "text": "herb scissors",
+      "matchType": "exact",
+      "suggestedBid": 0.55,
+      "searchVolume": "low",
+      "competition": "low",
+      "relevanceScore": 0.25
+    },
+    {
+      "id": "kw-009",
+      "text": "garlic press professional",
+      "matchType": "phrase",
+      "suggestedBid": 1.10,
+      "searchVolume": "low",
+      "competition": "medium",
+      "relevanceScore": 0.88
+    },
+    {
+      "id": "kw-010",
+      "text": "best garlic press 2024",
+      "matchType": "broad",
+      "suggestedBid": 0.90,
+      "searchVolume": "medium",
+      "competition": "high",
+      "relevanceScore": 0.70
+    },
+    {
+      "id": "kw-011",
+      "text": "cooking tools",
+      "matchType": "broad",
+      "suggestedBid": 2.10,
+      "searchVolume": "high",
+      "competition": "high",
+      "relevanceScore": 0.25
+    },
+    {
+      "id": "kw-012",
+      "text": "garlic crusher",
+      "matchType": "broad",
+      "suggestedBid": 0.70,
+      "searchVolume": "medium",
+      "competition": "medium",
+      "relevanceScore": 0.82
+    },
+    {
+      "id": "kw-013",
+      "text": "stainless steel kitchen tools",
+      "matchType": "phrase",
+      "suggestedBid": 1.40,
+      "searchVolume": "medium",
+      "competition": "high",
+      "relevanceScore": 0.45
+    },
+    {
+      "id": "kw-014",
+      "text": "garlic press easy clean",
+      "matchType": "exact",
+      "suggestedBid": 0.80,
+      "searchVolume": "low",
+      "competition": "low",
+      "relevanceScore": 0.93
+    },
+    {
+      "id": "kw-015",
+      "text": "free garlic press",
+      "matchType": "exact",
+      "suggestedBid": 0.30,
+      "searchVolume": "low",
+      "competition": "low",
+      "relevanceScore": 0.05
+    }
+  ],
+  "suggestedNegativeKeywords": [
+    {
+      "id": "neg-001",
+      "text": "free",
+      "matchType": "broad",
+      "reasoning": "Free-seeking shoppers rarely convert on a $29.99 premium product"
+    },
+    {
+      "id": "neg-002",
+      "text": "cheap",
+      "matchType": "broad",
+      "reasoning": "Price-sensitive shoppers looking for budget options, not premium"
+    },
+    {
+      "id": "neg-003",
+      "text": "replacement parts",
+      "matchType": "broad",
+      "reasoning": "Shoppers looking for replacement parts, not a new garlic press"
+    },
+    {
+      "id": "neg-004",
+      "text": "how to use",
+      "matchType": "broad",
+      "reasoning": "Informational search intent, not purchase intent"
+    },
+    {
+      "id": "neg-005",
+      "text": "electric garlic press",
+      "matchType": "exact",
+      "reasoning": "Shoppers looking for electric models, not manual"
+    }
+  ],
+  "referenceCampaigns": [
+    {
+      "id": "ref-001",
+      "name": "SP - Garlic Press - Exact Match",
+      "type": "sponsored-products",
+      "targetingType": "manual",
+      "dailyBudget": 25.00,
+      "bidStrategy": "dynamic-up-down",
+      "defaultBid": 1.25,
+      "keywords": [
+        { "id": "rk-001", "text": "garlic press", "matchType": "exact", "bid": 1.50, "isNegative": false },
+        { "id": "rk-002", "text": "heavy duty garlic press", "matchType": "exact", "bid": 0.85, "isNegative": false },
+        { "id": "rk-003", "text": "garlic press easy clean", "matchType": "exact", "bid": 0.80, "isNegative": false },
+        { "id": "rk-004", "text": "garlic press professional", "matchType": "exact", "bid": 1.10, "isNegative": false },
+        { "id": "rk-neg-001", "text": "free", "matchType": "broad", "bid": 0, "isNegative": true },
+        { "id": "rk-neg-002", "text": "cheap", "matchType": "broad", "bid": 0, "isNegative": true },
+        { "id": "rk-neg-003", "text": "electric garlic press", "matchType": "exact", "bid": 0, "isNegative": true }
+      ],
+      "asins": ["B0EXAMPLE01"],
+      "adGroupName": "Exact Match - Core",
+      "reasoning": "High-intent exact match keywords capture shoppers who know what they want. Dynamic up/down bidding optimizes for conversions. Negative keywords filter out low-value traffic."
+    },
+    {
+      "id": "ref-002",
+      "name": "SP - Garlic Press - Broad/Phrase Discovery",
+      "type": "sponsored-products",
+      "targetingType": "manual",
+      "dailyBudget": 20.00,
+      "bidStrategy": "dynamic-up-only",
+      "defaultBid": 0.75,
+      "keywords": [
+        { "id": "rk-005", "text": "garlic press", "matchType": "broad", "bid": 1.25, "isNegative": false },
+        { "id": "rk-006", "text": "garlic press stainless steel", "matchType": "phrase", "bid": 0.95, "isNegative": false },
+        { "id": "rk-007", "text": "garlic mincer", "matchType": "broad", "bid": 0.75, "isNegative": false },
+        { "id": "rk-008", "text": "garlic crusher", "matchType": "broad", "bid": 0.70, "isNegative": false },
+        { "id": "rk-neg-004", "text": "free", "matchType": "broad", "bid": 0, "isNegative": true },
+        { "id": "rk-neg-005", "text": "cheap", "matchType": "broad", "bid": 0, "isNegative": true },
+        { "id": "rk-neg-006", "text": "replacement parts", "matchType": "broad", "bid": 0, "isNegative": true },
+        { "id": "rk-neg-007", "text": "how to use", "matchType": "broad", "bid": 0, "isNegative": true }
+      ],
+      "asins": ["B0EXAMPLE01"],
+      "adGroupName": "Discovery - Broad/Phrase",
+      "reasoning": "Broad/phrase match keywords discover new search terms. Dynamic-up-only protects profitability by never raising bids above the set amount. Stronger negative keyword list to filter discovery traffic."
+    }
+  ],
+  "evaluationCriteria": [
+    {
+      "criterionId": "structure",
+      "name": "Campaign Structure",
+      "description": "Campaign uses an appropriate type, targeting mode, and bid strategy for the product and goals.",
+      "weight": 0.25,
+      "checks": [
+        "Campaign type is 'sponsored-products' (correct for a single ASIN product)",
+        "Targeting is 'manual' (needed for keyword-level control)",
+        "Bid strategy is dynamic (up-only or up-down) rather than legacy"
+      ]
+    },
+    {
+      "criterionId": "keyword-selection",
+      "name": "Keyword Selection",
+      "description": "Keywords are relevant, have appropriate match types, and cover both high-intent and discovery terms.",
+      "weight": 0.30,
+      "checks": [
+        "At least 3 exact match keywords for high-intent targeting",
+        "At least 2 broad/phrase keywords for discovery",
+        "No low-relevance keywords (relevanceScore < 0.3) without negatives",
+        "Keywords span different search intents (product-specific, use-case, quality)"
+      ]
+    },
+    {
+      "criterionId": "negative-keywords",
+      "name": "Negative Keywords",
+      "description": "Negative keywords effectively filter out irrelevant and low-converting search traffic.",
+      "weight": 0.20,
+      "checks": [
+        "At least 2 negative keywords present",
+        "Negative keywords include 'free' or 'cheap' (price-sensitive filter)",
+        "Negative keywords include irrelevant product types (e.g., 'electric')",
+        "Informational searches are negated (e.g., 'how to use')"
+      ]
+    },
+    {
+      "criterionId": "bidding",
+      "name": "Bid Configuration",
+      "description": "Bids are set at appropriate levels relative to product margin, competition, and keyword intent.",
+      "weight": 0.15,
+      "checks": [
+        "Default bid is within reasonable range ($0.50 - $2.00)",
+        "Exact match bids are higher than broad match bids",
+        "No bids exceed max profitable CPC (AOV x CVR x Target ACoS = $0.60)",
+        "Total daily spend fits within budget allocation"
+      ]
+    },
+    {
+      "criterionId": "budget",
+      "name": "Budget Allocation",
+      "description": "Daily budget is set appropriately for the product's sales velocity and goals.",
+      "weight": 0.10,
+      "checks": [
+        "Daily budget is at least $10 (minimum for meaningful data collection)",
+        "Daily budget is at most $100 (appropriate for a $29.99 product)",
+        "Budget accommodates at least 10 clicks per day at the default bid"
+      ]
+    }
+  ],
+  "missionBrief": {
+    "title": "Campaign Architect Mission",
+    "scenario": "You are launching a new Amazon PPC campaign for the Premium Garlic Press. This is a $29.99 product with a 35% profit margin. Your target ACoS is 25%, which means your break-even CPC is approximately $0.60 (AOV x CVR x Target ACoS). Your goal is to build a campaign structure that maximizes relevant traffic while staying profitable.",
+    "objectives": [
+      "Choose the right campaign type and targeting mode for a single-ASIN product",
+      "Select high-relevance keywords with appropriate match types and bids",
+      "Add negative keywords to filter out irrelevant traffic",
+      "Set a daily budget that allows for meaningful data collection",
+      "Choose a bid strategy that balances visibility with profitability"
+    ],
+    "tips": [
+      "Sponsored Products is the right campaign type for individual ASINs — Sponsored Brands and Display are for different use cases",
+      "Manual targeting gives you keyword-level control; auto targeting lets Amazon decide",
+      "Exact match keywords have higher conversion rates but lower reach; broad match is the opposite",
+      "Dynamic bid strategies (up-only or up-down) generally outperform legacy fixed bids",
+      "Negative keywords are just as important as positive keywords — they prevent wasted spend"
+    ]
+  }
+}

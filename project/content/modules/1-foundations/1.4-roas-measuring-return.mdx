@@ -1,0 +1,167 @@
+---
+title: "RoAS: Measuring Return"
+slug: "1.4-roas-measuring-return"
+moduleNumber: 1
+lessonNumber: 4
+type: "reading"
+estimatedMinutes: 10
+xpReward: 75
+---
+
+# RoAS: Measuring Return
+
+We've covered ACoS and TACoS — the "cost" perspective on advertising efficiency. Now let's look at the same data from the opposite direction: **return**. ROAS (Return on Ad Spend) tells you how many dollars of revenue you earn for every dollar you spend on advertising.
+
+## ROAS — Return on Ad Spend
+
+**Formula**: `ROAS = Attributed Sales / Ad Spend`
+
+ROAS is the mathematical inverse of ACoS. If your ACoS is 25%, your ROAS is 4.0x — for every $1 you spend on ads, you generate $4 in attributed revenue.
+
+### Converting Between ACoS and ROAS
+
+Since they're inverses, you can easily convert between them:
+
+| ACoS | ROAS | Relationship |
+|------|------|-------------|
+| 50% | 2.0x | 1 / 0.50 = 2.0 |
+| 33% | 3.0x | 1 / 0.33 = 3.0 |
+| 25% | 4.0x | 1 / 0.25 = 4.0 |
+| 20% | 5.0x | 1 / 0.20 = 5.0 |
+| 10% | 10.0x | 1 / 0.10 = 10.0 |
+
+If you know one, you always know the other. So why have both? Because different people think in different directions:
+
+- **ACoS** is intuitive for cost-focused managers: "I'm spending 25% of my ad revenue on ads"
+- **ROAS** is intuitive for return-focused managers: "I'm getting $4 back for every $1 I spend"
+
+Amazon's advertising console shows both metrics. Use whichever feels more natural to you — the math is identical.
+
+### ROAS Targets by Product Category
+
+Just like ACoS, "good" ROAS depends entirely on your product's margin structure. Products with thin margins need higher ROAS to be profitable:
+
+| Product Margin | Break-Even ROAS | Target ROAS |
+|---------------|----------------|-------------|
+| 15% | 6.7x | 8x+ |
+| 25% | 4.0x | 5x+ |
+| 35% | 2.9x | 3.5x+ |
+| 50% | 2.0x | 2.5x+ |
+
+Notice that the formula for break-even ROAS is simply `1 / Margin`. A product with a 25% margin needs at least 4x ROAS to break even — any less and the ad spend exceeds the profit from the sale.
+
+### ROAS by Campaign Type
+
+Different campaign types typically produce different ROAS levels because they serve different strategic purposes:
+
+| Campaign Type | Typical ROAS | Why |
+|--------------|-------------|-----|
+| Sponsored Products (Exact) | 5x – 10x | High intent, precise targeting |
+| Sponsored Products (Auto) | 3x – 6x | Discovery-oriented, mixed relevance |
+| Sponsored Brands | 2x – 5x | Brand awareness, multiple products |
+| Sponsored Display | 1.5x – 4x | Retargeting, audience-based, lower intent |
+
+Sponsored Products with exact match keywords tend to have the highest ROAS because they target shoppers who know exactly what they want. Sponsored Display often has lower ROAS because it targets broader audiences who are earlier in the purchase journey.
+
+## Average Order Value (AOV)
+
+**Formula**: `AOV = Total Sales / Total Orders`
+
+AOV is the average revenue generated per order. While not directly a "return" metric, AOV is critical for understanding ROAS because it determines how much revenue each conversion produces.
+
+### Why AOV Matters for ROAS
+
+Consider two products with identical conversion rates and CPC:
+
+**Product A** (Low AOV):
+- CPC: $1.50
+- CVR: 10%
+- AOV: $15
+- Cost per order: $15 ($1.50 / 10%)
+- ROAS: 1.0x ($15 / $15) — breaking even
+
+**Product B** (High AOV):
+- CPC: $1.50
+- CVR: 10%
+- AOV: $45
+- Cost per order: $15 ($1.50 / 10%)
+- ROAS: 3.0x ($45 / $15) — profitable
+
+Same traffic cost, same conversion rate, but Product B's ROAS is three times higher because each order generates three times the revenue. This is why high-AOV products can afford to bid more aggressively — they have more margin to work with.
+
+### AOV and the Maximum Profitable Bid
+
+AOV is a key input to the **maximum profitable bid** formula:
+
+**Formula**: `Max CPC = AOV x CVR x Target ACoS`
+
+This formula tells you the absolute maximum you can bid on a keyword while still hitting your target ACoS. Here's how it works:
+
+If your product has:
+- AOV = $40
+- CVR = 10% (0.10)
+- Target ACoS = 25% (0.25)
+
+Then: Max CPC = $40 x 0.10 x 0.25 = **$1.00**
+
+This means bidding above $1.00 on this keyword will push your ACoS above 25%. Bidding at $1.00 should give you exactly 25% ACoS. Bidding below $1.00 gives you room for ACoS to be even better than target.
+
+This is one of the most practical formulas in all of Amazon PPC. We'll use it extensively in the Bid Elevator simulation later.
+
+### Strategies to Increase AOV
+
+Since AOV directly impacts your maximum profitable bid and overall ROAS, increasing it is one of the highest-leverage actions you can take:
+
+1. **Bundle products** — Selling a set of 3 kitchen utensils as a bundle increases AOV from $12 to $35
+2. **Upsell variations** — Premium sizes or colors at higher price points
+3. **Subscribe & Save** — Increases the effective AOV by adding recurring revenue
+4. **Volume discounts** — Encouraging multi-unit purchases raises AOV per order
+
+## The ROAS-CVR-AOV Triangle
+
+These three metrics form a powerful triangle that determines your advertising economics:
+
+```
+        ROAS
+       /    \
+     AOV --- CVR
+```
+
+- **Higher AOV** → Higher ROAS (more revenue per order)
+- **Higher CVR** → Higher ROAS (more orders per click → more revenue per dollar spent)
+- **Higher ROAS** → Lower ACoS → More profitable advertising
+
+Improving any vertex of this triangle improves your overall advertising economics. The most controllable vertex is usually **CVR** (through listing optimization), followed by **AOV** (through bundling and pricing), while **ROAS** is the outcome you're trying to optimize.
+
+## ROAS Pitfalls
+
+### ROAS Doesn't Account for Product Costs
+
+A 4x ROAS sounds great, but if your product costs $25 to make and you sell it for $30, your actual profit after a $7.50 ad cost per sale is negative:
+
+- Revenue per sale: $30
+- Product cost: $25
+- Ad cost: $7.50
+- Net profit: -$2.50 (LOSS)
+
+Always pair ROAS with margin analysis. A profitable ROAS threshold depends on your product's cost structure.
+
+### ROAS Can Be Misleading Early in a Campaign
+
+New campaigns often start with artificially high or low ROAS due to small sample sizes. A campaign with 3 clicks and 1 sale has a CVR of 33% and potentially inflated ROAS. Wait for at least 20–30 clicks before drawing conclusions about a keyword's ROAS.
+
+### ROAS Varies by Attribution Window
+
+Amazon's 7-day attribution window doesn't capture all ad-driven sales. Some customers click an ad, leave, and purchase days later through organic search. Your actual return may be higher than what ROAS shows, especially for products with longer consideration cycles.
+
+## Try It: Formula Calculator
+
+Open the **Formula Calculator** and experiment:
+
+1. **ROAS**: Set Sales = $400, Spend = $100 → ROAS = 4.0x. Now try Spend = $200 → ROAS = 2.0x
+2. **AOV**: Set Sales = $640, Orders = 16 → AOV = $40. Try Orders = 32 → AOV = $20
+3. **Break-Even ACoS**: Set Margin = 30 → Break-Even ACoS = 30%. This means ROAS of 3.3x is your break-even point
+
+---
+
+*Next: We'll pull all six metrics together and see how they work in real campaign scenarios.*

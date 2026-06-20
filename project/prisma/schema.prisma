@@ -1,0 +1,533 @@
+// AdCraft: Amazon PPC Command Center — Prisma Schema
+// Architecture: Monolith-First (ADR-001)
+// All tables include nullable org_id for future multi-tenancy (Decision #9)
+// Simulation state stored as JSONB (Decision #10)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// USER & AUTH
+// ============================================================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  image         String?
+  passwordHash  String?   // Nullable for OAuth-only users; required for Credentials auth
+  orgId         String?   // org_id column prep — nullable for single-tenant MVP
+  role          UserRole  @default(STUDENT)
+  xp            Int       @default(0)
+  level         Int       @default(1)
+  streakDays    Int       @default(0)
+  lastActiveAt  DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  progress      ModuleProgress[]
+  simulationAttempts SimulationAttempt[]
+  aiChatSessions     AiChatSession[]
+  quizAttempts       QuizAttempt[]
+  badges             UserBadge[]
+
+  @@index([orgId])
+  @@index([email])
+}
+
+model Account {
+  id           String  @id @default(cuid())
+  userId       String
+  provider     String  // "github" | "google" | "credentials"
+  providerAccountId String
+  accessToken  String?
+  refreshToken String?
+  expiresAt    DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+// ============================================================================
+// CURRICULUM: MODULES & LESSONS
+// ============================================================================
+
+model Module {
+  id          String        @id @default(cuid())
+  orgId       String?       // org_id column prep
+  moduleNumber Int          @unique // 0, 1, 4, 6, 7 for MVP
+  title       String
+  slug        String        @unique // "onboarding", "foundations", etc.
+  description String
+  icon        String        // Lucide icon name
+  color       String        // Tailwind color class e.g. "emerald"
+  order       Int           // Display order
+  isPublished Boolean       @default(false)
+  estimatedMinutes Int      @default(30)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  lessons     Lesson[]
+  progress    ModuleProgress[]
+  simulations Simulation[]
+
+  @@index([orgId])
+  @@index([moduleNumber])
+}
+
+model Lesson {
+  id          String    @id @default(cuid())
+  orgId       String?   // org_id column prep
+  moduleId    String
+  lessonNumber Int      // Order within module
+  title       String
+  slug        String    @unique // "0.1-welcome", "1.2-cpc-deep-dive"
+  content     String    // MDX content
+  type        LessonType @default(READING)
+  estimatedMinutes Int  @default(10)
+  xpReward    Int       @default(50)
+  isPublished Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  module      Module    @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  progress    LessonProgress[]
+  quiz        Quiz?
+
+  @@unique([moduleId, lessonNumber])
+  @@index([orgId])
+  @@index([moduleId])
+}
+
+// ============================================================================
+// PROGRESS TRACKING
+// ============================================================================
+
+model ModuleProgress {
+  id          String            @id @default(cuid())
+  orgId       String?           // org_id column prep
+  userId      String
+  moduleId    String
+  status      ProgressStatus    @default(NOT_STARTED)
+  score       Int               @default(0) // 0-100
+  xpEarned    Int               @default(0)
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module      Module            @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, moduleId])
+  @@index([orgId])
+  @@index([userId])
+  @@index([status])
+}
+
+model LessonProgress {
+  id          String            @id @default(cuid())
+  orgId       String?           // org_id column prep
+  userId      String
+  lessonId    String
+  status      ProgressStatus    @default(NOT_STARTED)
+  score       Int               @default(0) // 0-100
+  xpEarned    Int               @default(0)
+  timeSpentSeconds Int          @default(0)
+  completedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  lesson      Lesson            @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  // We don't have a direct User relation here to keep it simple
+  // userId is sufficient for queries
+
+  @@unique([userId, lessonId])
+  @@index([orgId])
+  @@index([userId])
+  @@index([status])
+}
+
+// ============================================================================
+// QUIZZES (Post-MVP: Atomic Build A4)
+// ============================================================================
+
+model Quiz {
+  id            String    @id @default(cuid())
+  orgId         String?   // org_id column prep
+  lessonId      String    @unique // One quiz per lesson
+  title         String
+  description   String    @default("")
+  passThreshold Int       @default(70) // Minimum score (0-100) to earn XP
+  timeLimitSeconds Int?   // Optional time limit per question
+  isPublished   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  lesson        Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions     QuizQuestion[]
+  attempts      QuizAttempt[]
+
+  @@index([orgId])
+  @@index([lessonId])
+}
+
+model QuizQuestion {
+  id          String    @id @default(cuid())
+  quizId      String
+  order       Int       // Display order within quiz
+  question    String    // The question text
+  optionA     String    // Option A text
+  optionB     String    // Option B text
+  optionC     String    // Option C text
+  optionD     String    // Option D text (optional, can be empty)
+  correctAnswer String  // "A" | "B" | "C" | "D"
+  explanation String    @default("") // Shown after answering
+  points      Int       @default(1) // Points for this question
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  quiz        Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([quizId])
+  @@unique([quizId, order])
+}
+
+model QuizAttempt {
+  id              String        @id @default(cuid())
+  orgId           String?       // org_id column prep
+  userId          String
+  quizId          String
+  attemptNumber   Int           // 1, 2, 3... per user per quiz
+  status          AttemptStatus @default(IN_PROGRESS)
+  answers         String        // JSON — { "1": "A", "2": "C", ... } questionOrder → selectedOption
+  score           Int           @default(0) // 0-100 percentage
+  correctCount    Int           @default(0)
+  totalQuestions  Int           @default(0)
+  xpEarned       Int           @default(0) // Only awarded if score >= passThreshold
+  timeSpentSeconds Int         @default(0)
+  startedAt       DateTime      @default(now())
+  completedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz            Quiz          @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, quizId, attemptNumber])
+  @@index([orgId])
+  @@index([userId])
+  @@index([quizId])
+  @@index([status])
+}
+
+// ============================================================================
+// ACHIEVEMENT BADGES (Post-MVP: Atomic Build A1)
+// ============================================================================
+
+model Badge {
+  id          String        @id @default(cuid())
+  orgId       String?       // org_id column prep
+  slug        String        @unique // "first-lesson", "quiz-ace", etc.
+  title       String        // "First Lesson"
+  description String        // "Complete your first lesson"
+  icon        String        // Lucide icon name: "BookOpen", "Trophy", etc.
+  category    BadgeCategory
+  tier        BadgeTier     @default(BRONZE)
+  xpReward    Int           @default(0) // Bonus XP for earning this badge
+  criteria    String        // JSON — criteria definition for programmatic awarding
+  order       Int           // Display order within category
+  isSecret    Boolean       @default(false) // Hidden until earned
+  isPublished Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  awards      UserBadge[]
+
+  @@index([orgId])
+  @@index([category])
+  @@index([tier])
+}
+
+model UserBadge {
+  id          String    @id @default(cuid())
+  orgId       String?   // org_id column prep
+  userId      String
+  badgeId     String
+  xpEarned    Int       @default(0) // Bonus XP from badge's xpReward
+  earnedAt    DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge       Badge     @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId]) // One award per user per badge
+  @@index([orgId])
+  @@index([userId])
+  @@index([badgeId])
+  @@index([earnedAt])
+}
+
+// ============================================================================
+// SIMULATIONS
+// ============================================================================
+
+model Simulation {
+  id          String              @id @default(cuid())
+  orgId       String?             // org_id column prep
+  moduleId    String
+  type        SimulationType
+  title       String
+  slug        String              @unique // "campaign-builder", "bid-elevator", "str-triage-arena"
+  description String
+  difficulty  SimulationDifficulty @default(INTERMEDIATE)
+  timeLimitSeconds Int?           // Optional time limit
+  xpReward    Int                 @default(200)
+  isPublished Boolean             @default(false)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  // Relations
+  module      Module              @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  attempts    SimulationAttempt[]
+
+  @@index([orgId])
+  @@index([type])
+}
+
+model SimulationAttempt {
+  id              String              @id @default(cuid())
+  orgId           String?             // org_id column prep
+  userId          String
+  simulationId    String
+  attemptNumber   Int                 // 1, 2, 3... per user per simulation
+  status          AttemptStatus       @default(IN_PROGRESS)
+  previewScore    Int                 @default(0) // Client-side preview score (0-100)
+  officialScore   Int?                // Server-side authoritative score (0-100)
+  scoreDiscrepancy Boolean            @default(false) // True if preview != official
+  state           String              // JSONB — full simulation state snapshot
+  actions         String              // JSONB — array of user actions taken
+  timeSpentSeconds Int                @default(0)
+  startedAt       DateTime            @default(now())
+  submittedAt     DateTime?
+  gradedAt        DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  // Relations
+  user            User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  simulation      Simulation          @relation(fields: [simulationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, simulationId, attemptNumber])
+  @@index([orgId])
+  @@index([userId])
+  @@index([simulationId])
+  @@index([status])
+}
+
+// ============================================================================
+// SEARCH TERM DATA (STR Triage Arena)
+// ============================================================================
+
+model SearchTermRecord {
+  id              String    @id @default(cuid())
+  orgId           String?   // org_id column prep
+  datasetId       String    // Which fixture/dataset this record belongs to
+  searchTerm      String
+  keyword         String
+  matchType       MatchType
+  impressions     Int
+  clicks          Int
+  ctr             Float     // Click-through rate
+  spend           Float     // In USD
+  cpc             Float     // Cost per click
+  orders          Int
+  unitsSold       Int
+  sales           Float     // In USD
+  acos            Float     // Advertising Cost of Sales
+  roas            Float     // Return on Ad Spend
+  recommendedAction String  // "keep" | "pause" | "negate-exact" | "negate-phrase" | "optimize-bid"
+  reasoning       String    // Why this action is recommended (for AI feedback)
+  createdAt       DateTime  @default(now())
+
+  @@index([orgId])
+  @@index([datasetId])
+  @@index([searchTerm])
+}
+
+// ============================================================================
+// CAMPAIGN TEMPLATES (Campaign Builder)
+// ============================================================================
+
+model CampaignTemplate {
+  id              String              @id @default(cuid())
+  orgId           String?             // org_id column prep
+  name            String
+  type            CampaignType        @default(SPONSORED_PRODUCTS)
+  targetingType   TargetingType       @default(MANUAL)
+  dailyBudget     Float               @default(0)
+  bidStrategy     BidStrategy         @default(LEGACY)
+  defaultBid      Float               @default(1.0)
+  structure       String              // JSONB — campaign structure definition for simulation
+  isCorrect       Boolean             @default(false) // Whether this is the "answer" template
+  explanation     String?             // Why this is correct/incorrect
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@index([orgId])
+  @@index([type])
+}
+
+// ============================================================================
+// AI CHAT (AI Mentor)
+// ============================================================================
+
+model AiChatSession {
+  id              String    @id @default(cuid())
+  orgId           String?   // org_id column prep
+  userId          String
+  simulationAttemptId String? // Optional link to simulation attempt
+  title           String    @default("New Chat")
+  context         String?   // JSONB — context data (module, simulation state, etc.)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages        AiChatMessage[]
+
+  @@index([orgId])
+  @@index([userId])
+}
+
+model AiChatMessage {
+  id              String    @id @default(cuid())
+  sessionId       String
+  role            String    // "user" | "assistant" | "system"
+  content         String
+  metadata        String?   // JSONB — tokens, model, latency, etc.
+  createdAt       DateTime  @default(now())
+
+  // Relations
+  session         AiChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([createdAt])
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+
+// ponytail: event tracking for analytics
+model EventLog {
+  id        String   @id @default(cuid())
+  userId    String
+  eventType String   // lesson_started, lesson_completed, quiz_started, quiz_completed, simulation_started, simulation_graded, mentor_chat
+  metadata  String?  // JSONB — extra context (lesson slug, score, etc.)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([eventType])
+}
+enum UserRole {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+enum LessonType {
+  READING       // MDX content with text + interactive widgets
+  SIMULATION    // Embedded simulation
+  QUIZ          // Knowledge check
+  VIDEO         // Video lesson (future)
+}
+
+enum ProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum SimulationType {
+  CAMPAIGN_BUILDER
+  BID_ELEVATOR
+  STR_TRIAGE_ARENA
+}
+
+enum SimulationDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  SUBMITTED
+  GRADED
+  ARCHIVED
+}
+
+enum MatchType {
+  BROAD
+  PHRASE
+  EXACT
+}
+
+enum CampaignType {
+  SPONSORED_PRODUCTS
+  SPONSORED_BRANDS
+  SPONSORED_DISPLAY
+}
+
+enum TargetingType {
+  MANUAL
+  AUTO
+}
+
+enum BidStrategy {
+  LEGACY          // Manual bids
+  DYNAMIC_UP_ONLY // Dynamic bids - up only
+  DYNAMIC_UP_DOWN // Dynamic bids - up and down
+}
+
+enum BadgeCategory {
+  ENGAGEMENT     // First-time actions, exploration
+  MASTERY        // Module/quiz/simulation completion
+  XP_MILESTONE   // XP thresholds
+  STREAK         // Consecutive-day login
+  SOCIAL         // Mentor, community interactions
+}
+
+enum BadgeTier {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+}

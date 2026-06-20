@@ -1,0 +1,275 @@
+{
+  "id": "bid-elevator-pack-1",
+  "title": "Bid Elevator Pack 1 — Kitchen Gadgets Category",
+  "description": "A series of bidding scenarios for a kitchen gadgets seller. Each scenario presents a keyword with current performance data and market context. The user must decide the optimal bid to maximize profitability while maintaining volume.",
+  "category": "Kitchen & Dining",
+  "difficulty": "intermediate",
+  "totalScenarios": 10,
+  "productContext": {
+    "asin": "B0EXAMPLE1",
+    "title": "Premium Garlic Press - Stainless Steel Mincer with Easy Squeeze Handle",
+    "price": 24.99,
+    "margin": 0.35,
+    "averageOrderValue": 24.99
+  },
+  "thresholds": {
+    "acosTarget": 0.25,
+    "tacosTarget": 0.10,
+    "ctrMinimum": 0.02,
+    "conversionRateMinimum": 0.08,
+    "cpcMaximum": 2.50,
+    "roasMinimum": 4.0
+  },
+  "scenarios": [
+    {
+      "id": "bid-001",
+      "keyword": "garlic press",
+      "matchType": "broad",
+      "currentBid": 1.30,
+      "suggestedBidRange": { "min": 0.65, "recommended": 0.85, "max": 1.50 },
+      "currentPerformance": {
+        "impressions": 15420,
+        "clicks": 625,
+        "spend": 812.50,
+        "sales": 1299.48,
+        "orders": 52,
+        "unitsSold": 52
+      },
+      "marketContext": {
+        "averageCpc": 1.10,
+        "competitionLevel": "high",
+        "searchVolumeTrend": "stable",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.65,
+      "acceptableRange": { "min": 0.55, "max": 0.80 },
+      "reasoning": "Current ACoS is 62.5% — far above the 25% target. With a $24.99 AOV and 8.3% CVR, your max profitable CPC = AOV × CVR × Target ACoS = $24.99 × 0.083 × 0.25 = $0.52. However, lowering too aggressively loses impression share. $0.65 balances profitability with maintaining rank in a high-competition keyword."
+    },
+    {
+      "id": "bid-002",
+      "keyword": "garlic press stainless steel",
+      "matchType": "broad",
+      "currentBid": 1.10,
+      "suggestedBidRange": { "min": 0.50, "recommended": 0.75, "max": 1.20 },
+      "currentPerformance": {
+        "impressions": 8340,
+        "clicks": 445,
+        "spend": 489.50,
+        "sales": 1199.52,
+        "orders": 48,
+        "unitsSold": 48
+      },
+      "marketContext": {
+        "averageCpc": 0.95,
+        "competitionLevel": "medium",
+        "searchVolumeTrend": "stable",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.75,
+      "acceptableRange": { "min": 0.65, "max": 0.90 },
+      "reasoning": "ACoS at 40.8% is above target but the term converts well (10.8% CVR). Max CPC = $24.99 × 0.108 × 0.25 = $0.67. Bidding $0.75 gives slight premium over max profitable bid to maintain position — acceptable since this high-CVR term generates consistent orders."
+    },
+    {
+      "id": "bid-003",
+      "keyword": "stainless steel garlic press",
+      "matchType": "exact",
+      "currentBid": 0.80,
+      "suggestedBidRange": { "min": 0.55, "recommended": 0.75, "max": 1.00 },
+      "currentPerformance": {
+        "impressions": 2980,
+        "clicks": 178,
+        "spend": 142.40,
+        "sales": 599.76,
+        "orders": 24,
+        "unitsSold": 24
+      },
+      "marketContext": {
+        "averageCpc": 0.70,
+        "competitionLevel": "medium",
+        "searchVolumeTrend": "rising",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.80,
+      "acceptableRange": { "min": 0.70, "max": 0.95 },
+      "reasoning": "Already performing well at 23.7% ACoS — below the 25% target! With rising search volume and 13.5% CVR, this is a star keyword. Keep the current bid at $0.80 or even consider a slight increase to capture growing demand. Max CPC at this CVR = $24.99 × 0.135 × 0.25 = $0.84."
+    },
+    {
+      "id": "bid-004",
+      "keyword": "garlic crusher",
+      "matchType": "broad",
+      "currentBid": 1.10,
+      "suggestedBidRange": { "min": 0.45, "recommended": 0.65, "max": 1.00 },
+      "currentPerformance": {
+        "impressions": 5210,
+        "clicks": 230,
+        "spend": 253.00,
+        "sales": 549.78,
+        "orders": 22,
+        "unitsSold": 22
+      },
+      "marketContext": {
+        "averageCpc": 0.90,
+        "competitionLevel": "medium",
+        "searchVolumeTrend": "declining",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.55,
+      "acceptableRange": { "min": 0.45, "max": 0.70 },
+      "reasoning": "ACoS at 46% with declining search volume makes this a clear bid reduction case. CVR of 9.6% means max CPC = $24.99 × 0.096 × 0.25 = $0.60. With declining volume, there's no reason to bid above profitable levels. Drop to $0.55 to secure profitability."
+    },
+    {
+      "id": "bid-005",
+      "keyword": "best garlic press 2024",
+      "matchType": "broad",
+      "currentBid": 0.70,
+      "suggestedBidRange": { "min": 0.50, "recommended": 0.70, "max": 1.10 },
+      "currentPerformance": {
+        "impressions": 2100,
+        "clicks": 125,
+        "spend": 87.50,
+        "sales": 374.85,
+        "orders": 15,
+        "unitsSold": 15
+      },
+      "marketContext": {
+        "averageCpc": 0.75,
+        "competitionLevel": "low",
+        "searchVolumeTrend": "rising",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.90,
+      "acceptableRange": { "min": 0.75, "max": 1.10 },
+      "reasoning": "This is a high-intent 'best' query with 23.3% ACoS — already below target! With 12% CVR, low competition, and rising search volume, this is an opportunity to bid UP. Max CPC = $24.99 × 0.12 × 0.25 = $0.75, but with room to profitably bid higher since current ACoS is below target. Increase to $0.90 to capture more of this valuable traffic."
+    },
+    {
+      "id": "bid-006",
+      "keyword": "garlic press for arthritis",
+      "matchType": "broad",
+      "currentBid": 0.60,
+      "suggestedBidRange": { "min": 0.35, "recommended": 0.55, "max": 0.85 },
+      "currentPerformance": {
+        "impressions": 760,
+        "clicks": 42,
+        "spend": 25.20,
+        "sales": 149.94,
+        "orders": 6,
+        "unitsSold": 6
+      },
+      "marketContext": {
+        "averageCpc": 0.50,
+        "competitionLevel": "low",
+        "searchVolumeTrend": "stable",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.75,
+      "acceptableRange": { "min": 0.60, "max": 0.90 },
+      "reasoning": "Outstanding performance at 16.8% ACoS with 14.3% CVR! This niche term perfectly matches the product's 'easy squeeze' handle. Max CPC = $24.99 × 0.143 × 0.25 = $0.89. With low competition, you can safely bid up to $0.75-$0.85 to capture more of this highly converting traffic while staying well under your max profitable CPC."
+    },
+    {
+      "id": "bid-007",
+      "keyword": "garlic mincer",
+      "matchType": "phrase",
+      "currentBid": 0.90,
+      "suggestedBidRange": { "min": 0.50, "recommended": 0.70, "max": 1.00 },
+      "currentPerformance": {
+        "impressions": 3450,
+        "clicks": 155,
+        "spend": 139.50,
+        "sales": 449.82,
+        "orders": 18,
+        "unitsSold": 22
+      },
+      "marketContext": {
+        "averageCpc": 0.75,
+        "competitionLevel": "medium",
+        "searchVolumeTrend": "stable",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.72,
+      "acceptableRange": { "min": 0.60, "max": 0.85 },
+      "reasoning": "ACoS at 31% is slightly above the 25% target. CVR of 11.6% means max CPC = $24.99 × 0.116 × 0.25 = $0.72. The term is close to profitable — a small reduction from $0.90 to $0.72 should bring it right to target. Phrase match gives you good control over when you appear."
+    },
+    {
+      "id": "bid-008",
+      "keyword": "garlic press professional",
+      "matchType": "exact",
+      "currentBid": 0.60,
+      "suggestedBidRange": { "min": 0.45, "recommended": 0.65, "max": 1.00 },
+      "currentPerformance": {
+        "impressions": 1320,
+        "clicks": 82,
+        "spend": 49.20,
+        "sales": 249.90,
+        "orders": 10,
+        "unitsSold": 10
+      },
+      "marketContext": {
+        "averageCpc": 0.60,
+        "competitionLevel": "low",
+        "searchVolumeTrend": "rising",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.85,
+      "acceptableRange": { "min": 0.70, "max": 1.05 },
+      "reasoning": "Another star keyword at 19.7% ACoS with 12.2% CVR. Max CPC = $24.99 × 0.122 × 0.25 = $0.76. But since current ACoS is well below target and search volume is rising, you have room to bid up. $0.85 increases impression share while keeping ACoS near target. This is an exact match — every click counts."
+    },
+    {
+      "id": "bid-009",
+      "keyword": "garlic press gift",
+      "matchType": "phrase",
+      "currentBid": 0.80,
+      "suggestedBidRange": { "min": 0.45, "recommended": 0.65, "max": 0.95 },
+      "currentPerformance": {
+        "impressions": 1650,
+        "clicks": 72,
+        "spend": 57.60,
+        "sales": 224.91,
+        "orders": 8,
+        "unitsSold": 9
+      },
+      "marketContext": {
+        "averageCpc": 0.65,
+        "competitionLevel": "medium",
+        "searchVolumeTrend": "rising",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.70,
+      "acceptableRange": { "min": 0.60, "max": 0.85 },
+      "reasoning": "ACoS at 25.6% — right at the target! 11.1% CVR and rising search volume (especially around holidays). Max CPC = $24.99 × 0.111 × 0.25 = $0.69. A small reduction to $0.70 keeps you at target ACoS while maintaining good position. This term has seasonal upside — monitor closely during Q4."
+    },
+    {
+      "id": "bid-010",
+      "keyword": "garlic press easy clean",
+      "matchType": "phrase",
+      "currentBid": 0.90,
+      "suggestedBidRange": { "min": 0.45, "recommended": 0.65, "max": 0.95 },
+      "currentPerformance": {
+        "impressions": 1890,
+        "clicks": 95,
+        "spend": 85.50,
+        "sales": 274.89,
+        "orders": 11,
+        "unitsSold": 11
+      },
+      "marketContext": {
+        "averageCpc": 0.70,
+        "competitionLevel": "low",
+        "searchVolumeTrend": "stable",
+        "productMargin": 0.35,
+        "breakEvenAcos": 0.35
+      },
+      "optimalBid": 0.65,
+      "acceptableRange": { "min": 0.55, "max": 0.80 },
+      "reasoning": "ACoS at 31.1% is above target. CVR of 11.6% means max CPC = $24.99 × 0.116 × 0.25 = $0.72. The 'easy clean' angle is a key differentiator for this product, so it's worth maintaining. Drop bid to $0.65 — slightly under max CPC — to bring ACoS to target while keeping the relevant traffic flowing."
+    }
+  ]
+}

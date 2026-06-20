@@ -1,0 +1,130 @@
+---
+title: "Placement Adjustments & Bid Multipliers"
+slug: "6.2-placement-adjustments"
+moduleNumber: 6
+lessonNumber: 2
+type: "reading"
+estimatedMinutes: 12
+xpReward: 100
+---
+
+# Placement Adjustments & Bid Multipliers
+
+Not all ad placements are created equal. Top-of-search positions convert at 2–3x the rate of other placements. Product detail page placements have different intent dynamics. Amazon's placement adjustments let you bid more aggressively for the placements that work best for your products — but they also create multiplicative effects that can blow through budgets if you're not careful.
+
+## The Three Placement Options
+
+Amazon allows bid adjustments for three placement categories:
+
+**1. Top of Search (First Page)**
+- This is the most valuable placement in Amazon PPC
+- Your ad appears at the very top of the first page of search results
+- Typically shows 2–4 Sponsored Products before organic results
+- Highest CTR and highest CVR of any placement
+- Also the most expensive — competition is fierce
+
+**2. Product Pages**
+- Your ad appears on other products' detail pages in the "Sponsored products related to this item" section
+- Lower CTR than top-of-search (shoppers are looking at another product, not actively searching)
+- But CVR can be solid when you appear on complementary products or weaker competitors' pages
+- Generally lower CPC than top-of-search
+
+**3. Rest of Search**
+- All other placements including middle and bottom of search results
+- Lowest visibility and typically lowest performance
+- No bid adjustment available — this is the "default" placement
+
+## How Placement Adjustments Work
+
+A placement adjustment is a percentage increase on top of your base bid. It does NOT reduce your bid for other placements — it only increases it for the targeted placement.
+
+**Example:**
+- Base bid: $1.00
+- Top of Search adjustment: +50%
+- Effective bid at Top of Search: $1.50
+- Effective bid at Product Pages: $1.00 (no adjustment)
+- Effective bid at Rest of Search: $1.00 (no adjustment)
+
+The adjustment is always additive — you can set it from 0% to 900% for top-of-search and product pages. You cannot set negative adjustments to avoid certain placements.
+
+## The Multiplication Danger
+
+Placement adjustments become truly dangerous when combined with Dynamic Bids — Up and Down. The effective bid is calculated as:
+
+```
+Effective Bid = Base Bid × (1 + Dynamic Adjustment) × (1 + Placement Adjustment)
+```
+
+**Worst-case scenario:**
+- Base bid: $1.00
+- Dynamic Up and Down: Amazon increases by 100% (maximum for standard)
+- Top of Search adjustment: +900% (maximum)
+- Effective bid at Top of Search: $1.00 × 2.0 × 10.0 = **$20.00**
+
+That's a 20x multiplier on your base bid. A single click could cost you $20.00 when you expected $1.00. This is not theoretical — it happens regularly to advertisers who don't understand the math.
+
+**Safer scenario with Dynamic Up and Down:**
+- Base bid: $0.75
+- Dynamic Up and Down: +30% typical increase
+- Top of Search adjustment: +50%
+- Effective bid at Top of Search: $0.75 × 1.3 × 1.5 = **$1.46**
+
+More reasonable, but still nearly 2x your base bid. Always calculate the maximum possible CPC before setting placement adjustments.
+
+## Placement Performance Data
+
+Before setting adjustments, check your placement data. Amazon provides performance breakdowns by placement in the campaign manager. Look for:
+
+**Top of Search metrics:**
+- What's your CTR at top-of-search vs. other placements?
+- What's your CVR at top-of-search?
+- What's your ACoS at top-of-search?
+
+**Product Pages metrics:**
+- Does product page targeting convert for your category?
+- Which ASINs drive the best performance?
+- Is ACoS acceptable?
+
+**Typical patterns by category:**
+- **High-consideration purchases** (electronics, appliances): Top-of-search is critical because shoppers research before buying. Strong placement adjustment justified.
+- **Impulse purchases** (snacks, accessories): Product pages can perform well because shoppers are browsing. Moderate placement adjustments for both.
+- **Niche products** (specialty tools, professional equipment): Top-of-search matters because search terms are specific. High placement adjustment for search.
+
+## Setting Smart Placement Adjustments
+
+**Step 1: Start with data.** Never set placement adjustments on a new campaign. Run for at least 2 weeks with 0% adjustments and collect placement performance data.
+
+**Step 2: Calculate your effective bid ceiling.** If your maximum acceptable CPC is $2.00 and you're using Dynamic Up and Down with a +50% top-of-search adjustment, your base bid should not exceed: `$2.00 / (1 + 0.5 × dynamic) / (1 + 0.5)`. For a 30% typical dynamic increase: `$2.00 / 1.3 / 1.5 = $1.03`.
+
+**Step 3: Start conservative.** Begin with +10–25% for top-of-search. You can always increase later. Going straight to +100% or higher without data is gambling.
+
+**Step 4: Monitor actual CPC at each placement.** Your effective bid is a ceiling — actual CPC may be lower. If you're consistently winning top-of-search placements at a CPC well below your effective bid, you might be able to reduce the placement adjustment and save budget.
+
+**Step 5: Adjust based on ACoS, not just position.** Winning top-of-search at a high CPC doesn't help if the resulting ACoS exceeds your target. Track ACoS by placement, not just CPC and conversion rate.
+
+## The Placement Budget Trap
+
+When you add a top-of-search adjustment, you're telling Amazon "I'm willing to pay more for this placement." But your campaign budget doesn't increase. The result: fewer total clicks, but more expensive ones at top-of-search.
+
+**Example:**
+- Budget: $50/day
+- Base bid: $1.00, no adjustment → ~50 clicks (mix of placements)
+- Base bid: $1.00, +100% top-of-search → ~25 clicks (mostly top-of-search at ~$2.00 each)
+
+You've doubled your cost-per-click for premium placement but halved your traffic volume. This makes sense only if top-of-search converts at 2x+ the rate of other placements — which it often does, but you need to verify with your own data.
+
+**Rule of thumb:** If adding a placement adjustment reduces your total clicks by more than it increases your conversion rate, it's not worth it. Do the math.
+
+## Key Takeaways
+
+- Top-of-search is the most valuable placement, with 2–3x higher CTR and CVR than other positions
+- Placement adjustments are percentage increases on top of your base bid — they can't reduce bids
+- Combined with Dynamic Up and Down, adjustments create multiplicative effects up to 20x your base bid
+- Always calculate your maximum possible CPC before setting adjustments
+- Start with data: run 2+ weeks at 0% adjustments before increasing
+- Monitor ACoS by placement, not just position or CPC
+- Higher placement adjustments reduce total clicks but increase per-click quality — verify the tradeoff is worth it
+
+---
+
+*In the next lesson, we'll prepare for the Bid Elevator simulation, where you'll practice making real-time bidding decisions across multiple scenarios.*

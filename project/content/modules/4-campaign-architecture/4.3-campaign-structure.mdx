@@ -1,0 +1,155 @@
+---
+title: "Campaign Structure: Organizing for Control and Scale"
+slug: "4.3-campaign-structure"
+moduleNumber: 4
+lessonNumber: 3
+type: "reading"
+estimatedMinutes: 14
+xpReward: 125
+---
+
+# Campaign Structure: Organizing for Control and Scale
+
+Campaign structure is one of the most underestimated aspects of Amazon PPC. A well-structured account gives you surgical control over budgets and bids. A poorly structured one forces you to make blunt adjustments that waste money. This lesson teaches you the principles and patterns for organizing campaigns that scale.
+
+## Why Structure Matters
+
+Imagine you have 200 keywords across 10 products, all dumped into a single campaign with a $100 daily budget. Your best keyword — one that converts at 20% with a $0.75 CPC — competes for the same budget as a keyword that converts at 3% with a $2.50 CPC. The poor performer eats most of the budget because it's more expensive, and your winner gets starved.
+
+**Structure exists to solve one core problem: resource allocation.** When similar keywords are grouped together with their own budgets and bid strategies, you can direct spend where it generates the most return.
+
+The three goals of good campaign structure:
+1. **Control** — Adjust bids and budgets at the right granularity
+2. **Measurement** — Know exactly what's working and what isn't
+3. **Scale** — Add new keywords, products, and strategies without creating a mess
+
+## The Four Structure Patterns
+
+### Pattern 1: Match Type Separation (The Standard)
+
+This is the most common and widely recommended structure. Create separate campaigns for each match type:
+
+```
+SP-Exact-[Product]
+  └── Ad Group: Hero Keywords (exact match)
+  └── Budget: $50/day, Bids: $1.50–$3.00
+
+SP-Phrase-[Product]
+  └── Ad Group: Category Terms (phrase match)
+  └── Budget: $30/day, Bids: $0.75–$1.50
+
+SP-Broad-[Product]
+  └── Ad Group: Discovery Terms (broad match)
+  └── Budget: $15/day, Bids: $0.30–$0.75
+```
+
+**Why separate by match type?** Because each match type has a fundamentally different purpose and bid level. Exact match keywords are proven converters — they deserve the highest bids and biggest budgets. Broad match keywords are research tools — they should have lower bids so you can afford to discover new terms without overspending.
+
+**The keyword waterfall:** This structure creates a natural "waterfall." Broad match campaigns discover new search terms. You review the search term report, identify high-performing terms, and add them as exact match keywords in your exact campaign. The phrase campaign serves as a middle layer for semi-validated terms.
+
+### Pattern 2: Product Separation
+
+When selling multiple products, create separate campaigns per product or product group:
+
+```
+SP-Exact-CoffeeMaker-Pro
+  └── Budget: $40/day
+
+SP-Exact-CoffeeMaker-Basic
+  └── Budget: $25/day
+
+SP-Exact-TravelMug
+  └── Budget: $15/day
+```
+
+**Why separate by product?** Different products have different margins, conversion rates, and strategic importance. A hero product with 40% margin can afford higher ACoS targets than a clearance item with 10% margin. Separate campaigns let you set different budget caps and bid strategies.
+
+### Pattern 3: Purpose-Based Campaigns
+
+Organize campaigns by their strategic purpose rather than just match type:
+
+| Campaign | Purpose | Bid Strategy | Budget |
+|----------|---------|-------------|--------|
+| SP-Exact-Profit | Drive profitable sales | Target ACoS below margin | High |
+| SP-Exact-Visibility | Win top-of-search | Aggressive bids, accept higher ACoS | Medium |
+| SP-Broad-Research | Discover new terms | Low bids, harvest search terms | Low |
+| SP-PAT-Compete | Win from competitors | Moderate, bid on specific ASINs | Medium |
+| SP-PAT-Complement | Cross-sell | Lower bids, complementary ASINs | Low |
+
+This pattern gives you the most strategic control because each campaign has a clear objective and you can measure success against that objective.
+
+### Pattern 4: Hybrid (Recommended for Scale)
+
+Combine match type separation with product separation:
+
+```
+SP-Exact-CoffeeMaker-Pro
+  └── Ad Group 1: Brand terms (highest bids)
+  └── Ad Group 2: Product-specific terms
+  └── Ad Group 3: High-performer harvest
+
+SP-Phrase-CoffeeMaker-Pro
+  └── Ad Group: Category + use-case terms
+
+SP-Broad-CoffeeMaker-Pro
+  └── Ad Group: Discovery terms
+
+SP-PAT-CoffeeMaker-Pro-Compete
+  └── Ad Group: Competitor ASINs
+
+SP-PAT-CoffeeMaker-Pro-Complement
+  └── Ad Group: Complementary ASINs
+```
+
+This is 5+ campaigns per product, which feels like a lot for a single SKU. But each campaign has a clear purpose, its own budget, and its own bid range. When you need to increase visibility for your hero product, you increase the budget on SP-Exact-CoffeeMaker-Pro — not on a catch-all campaign that also funds underperformers.
+
+## Naming Conventions
+
+A good naming convention makes your account navigable at a glance. Use consistent, descriptive names:
+
+**Format:** `[AdType]-[MatchType/Purpose]-[Product]-[Variant]`
+
+Examples:
+- `SP-Exact-CoffeeMaker-Pro`
+- `SB-Video-CoffeeMaker-Line`
+- `SD-Retarget-CoffeeMaker-Pro`
+- `SP-PAT-Compete-CoffeeMaker-Pro`
+
+Avoid vague names like "Campaign 1" or "Test Campaign." Three months from now, you won't remember what "Test Campaign" was testing.
+
+## Budget Setting Principles
+
+Setting budgets is not a one-time decision. It's an ongoing process that starts with smart initial values.
+
+**The minimum viable budget rule:** Each campaign needs enough daily budget to generate at least 10 clicks per day. If your average CPC is $1.00, your minimum budget is $10/day. Below this threshold, you won't get enough data to make optimization decisions.
+
+**The 80/20 allocation:**
+- 80% of budget to proven campaigns (exact match, retargeting, brand defense)
+- 20% of budget to experimental campaigns (broad match, new product launches, competitor conquesting)
+
+**The scaling trigger:** When a campaign consistently hits its daily budget before the end of the day AND is hitting your ACoS target, increase the budget by 20–30%. If ACoS is above target, don't increase budget — adjust bids first.
+
+## Common Structural Mistakes
+
+**Mistake 1: The mega-campaign.** One campaign with 500 keywords, all match types, multiple products. You can't control anything at this level. Break it up.
+
+**Mistake 2: Too many tiny campaigns.** The opposite extreme — 100 campaigns with $2/day budgets each. You'll never get enough data per campaign to optimize. Consolidate small campaigns or increase budgets.
+
+**Mistake 3: Mixing match types in one ad group.** Exact match keywords with $2.00 bids and broad match keywords with $0.50 bids in the same ad group means Amazon will overspend on broad matches. Separate them.
+
+**Mistake 4: No negative keyword strategy across campaigns.** If your exact campaign targets "coffee maker" and your broad campaign targets "coffee," the broad campaign will show for "coffee maker" — competing with your own exact campaign. Add "coffee maker" as a negative exact in the broad campaign.
+
+**Mistake 5: Forgetting to set end dates on promotional campaigns.** Holiday or launch campaigns with temporarily high bids should have end dates. Without them, you'll forget and keep spending at elevated rates after the promotion ends.
+
+## Key Takeaways
+
+- Campaign structure solves the resource allocation problem — similar keywords need their own budget and bid controls
+- Match type separation is the foundational pattern: separate campaigns for exact, phrase, and broad
+- Product separation matters when products have different margins and strategic importance
+- Purpose-based campaigns give the most strategic control for experienced advertisers
+- Good naming conventions make your account navigable; use `[Type]-[Match]-[Product]` format
+- Each campaign needs enough budget for at least 10 clicks/day to generate actionable data
+
+---
+
+*In the next lesson, we'll bring it all together and prepare for the Campaign Builder simulation, where you'll design a complete campaign architecture from scratch.*
