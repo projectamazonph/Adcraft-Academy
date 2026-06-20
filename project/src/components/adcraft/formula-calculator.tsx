@@ -245,7 +245,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.4 }}
       >
         <Card className="relative overflow-hidden border-sky-500/20 bg-gradient-to-br from-sky-500/6 via-card to-card">
           <div className="absolute top-0 right-0 w-56 h-56 bg-sky-500/4 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
@@ -273,7 +273,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: 0.05 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.05 }}
       >
         <Card className="border-border">
           <CardContent className="py-3 px-3">
@@ -311,7 +311,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: 0.1 }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.1 }}
           className="lg:col-span-3 space-y-4"
         >
           {/* Formula Expression Card */}
@@ -399,7 +399,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.15 }}
           className="lg:col-span-2 space-y-4"
         >
           {/* Computed Result */}
@@ -420,7 +420,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.2 }}
+                    transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.2 }}
                   >
                     <p className="text-3xl font-bold font-mono">
                       <span className={uConfig.color}>
@@ -534,7 +534,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.2 }}
         >
           <Card className="border-border">
             <CardHeader className="pb-3">
@@ -575,7 +575,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.2 }}
+                  transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.2 }}
                   className={cn(
                     'p-4 rounded-lg border text-sm leading-relaxed',
                     tipTab === 'insight' && 'bg-sky-500/5 border-sky-500/15',
@@ -605,7 +605,7 @@ export function FormulaCalculator({ moduleRef = 1, className }: FormulaCalculato
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.4, delay: 0.25 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.25 }}
       >
         <Card className="border-border">
           <CardHeader className="pb-3">

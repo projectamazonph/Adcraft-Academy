@@ -10,6 +10,9 @@ import {
   X,
   ChevronLeft,
   Zap,
+  Trophy,
+  BarChart3,
+  Award,
   LogOut,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -94,7 +97,7 @@ export function Sidebar({
             ? { width: collapsed ? 68 : 240 }
             : {}
         }
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.2 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.2 }}
         style={{
           width: collapsed ? 68 : 240,
           flexDirection: 'column',

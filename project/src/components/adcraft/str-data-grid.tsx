@@ -192,7 +192,7 @@ function RowActions({ row }: { row: SearchTermEntry }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.2 }}
+            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.2 }}
             className="overflow-hidden"
           >
             <div className="flex items-center gap-2">
@@ -230,7 +230,7 @@ function RowActions({ row }: { row: SearchTermEntry }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.2 }}
+            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.2 }}
             className="overflow-hidden"
           >
             <div className="flex items-center gap-2">

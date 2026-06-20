@@ -85,7 +85,7 @@ export function StrBriefing() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.5 }}
       >
         <Card className="relative overflow-hidden border-rose-500/20 bg-gradient-to-br from-rose-500/8 via-card to-card">
           <div className="absolute top-0 right-0 w-72 h-72 bg-rose-500/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
@@ -115,7 +115,7 @@ export function StrBriefing() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5, delay: 0.1 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.1 }}
       >
         <Card className="border-border">
           <CardHeader className="pb-3">
@@ -168,7 +168,7 @@ export function StrBriefing() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5, delay: 0.2 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.2 }}
       >
         <Card className="border-border">
           <CardHeader className="pb-3">
@@ -207,7 +207,7 @@ export function StrBriefing() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5, delay: 0.3 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.3 }}
       >
         <Card className="border-border">
           <CardHeader className="pb-3">
@@ -243,7 +243,7 @@ export function StrBriefing() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.5, delay: 0.4 }}
+        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.4 }}
         className="pb-8"
       >
         <Button

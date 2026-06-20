@@ -38,6 +38,7 @@ model User {
   aiChatSessions     AiChatSession[]
   quizAttempts       QuizAttempt[]
   badges             UserBadge[]
+  eventLogs          EventLog[]
 
   @@index([orgId])
   @@index([email])

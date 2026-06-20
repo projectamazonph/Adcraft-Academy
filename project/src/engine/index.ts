@@ -54,3 +54,51 @@ export type {
   SimulationEvaluation,
 } from './types';
 
+
+// Functions — evaluation
+export {
+  evaluateStrTriage,
+  previewStrTriageScore,
+  previewCampaignBuilderScore,
+  previewBidElevatorScore,
+  validateCampaignBuilder,
+  validateStrTriageActions,
+  evaluateBidElevator,
+} from './evaluation';
+
+// Functions — formulas
+export {
+  calculateCpc,
+  calculateAcos,
+  calculateTacos,
+  calculateRoas,
+  calculateCtr,
+  calculateConversionRate,
+  calculateBreakEvenAcos,
+  calculateMaxCpc,
+  calculateAov,
+  calculateImpressionShare,
+  calculateMetrics,
+  calculateMetricsWithTacos,
+  assessMetricHealth,
+  assessMetricsHealth,
+  computeFormula,
+  formatFormulaOutput,
+  getFormulasForModule,
+  getFormulaBySlug,
+  PPC_FORMULAS,
+} from './formulas';
+
+// Functions — simulation
+export {
+  createSimulationState,
+  startSimulation,
+  addCampaign,
+  addKeyword,
+  removeKeyword,
+  initBidElevatorScenarios,
+  recordBidDecision,
+  initStrTriageSearchTerms,
+  recordStrAction,
+  isSimulationComplete,
+} from './simulation';

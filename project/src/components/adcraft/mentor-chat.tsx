@@ -600,7 +600,7 @@ function MessageBubble({
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1],  0.3 }}
+      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1], delay: 0.3 }}
       className={cn('flex gap-3', isUser ? 'flex-row-reverse' : '')}
     >
       {/* Avatar */}
