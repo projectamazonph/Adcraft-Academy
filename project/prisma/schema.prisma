@@ -38,6 +38,7 @@ model User {
   aiChatSessions     AiChatSession[]
   quizAttempts       QuizAttempt[]
   badges             UserBadge[]
+  certificates       Certificate[]
   eventLogs          EventLog[]
 
   @@index([orgId])
@@ -482,6 +483,32 @@ enum LessonType {
   VIDEO         // Video lesson (future)
 }
 
+
+// ============================================================================
+// CERTIFICATE LIFECYCLE
+// ============================================================================
+
+model Certificate {
+  id              String   @id @default(cuid())
+  userId          String
+  certType        String   @default("completion") // "completion" | "expert" | "instructor"
+  title           String   @default("AdCraft PPC Command Center")
+  status          String   @default("active") // "active" | "expired" | "revoked"
+  verificationHash String  @unique // Public-facing unique hash for verification
+  metadata        String?  // JSONB — extra cert data
+  issuedAt        DateTime @default(now())
+  expiresAt       DateTime?
+  revokedAt       DateTime?
+  revokedReason   String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([verificationHash])
+  @@index([status])
+}
 enum ProgressStatus {
   NOT_STARTED
   IN_PROGRESS

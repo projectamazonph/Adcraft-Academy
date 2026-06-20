@@ -51,7 +51,7 @@ import { Leaderboard } from '@/components/adcraft/leaderboard';
 import { getCheatSheet } from '@/app/actions/cheatsheet';
 import { AnalyticsDashboard } from '@/components/adcraft/analytics-dashboard';
 import { AdminAnalytics } from '@/components/adcraft/admin-analytics';
-import { CertificateGenerator } from '@/components/adcraft/certificate';
+import { CertificateManager } from '@/components/adcraft/certificate-manager';
 import { getUserStats } from '@/app/actions/simulation';
 import { useSession } from 'next-auth/react';
 import { cn } from '@/lib/utils';
@@ -406,7 +406,7 @@ export default function Home() {
               {activeTab === 'leaderboard' && <Leaderboard />}
               {activeTab === 'analytics' && <AnalyticsDashboard />}
               {activeTab === 'admin' && <AdminAnalytics />}
-              {activeTab === 'certificate' && <CertificateGenerator />}
+              {activeTab === 'certificate' && <CertificateManager />}
             </motion.div>
           </AnimatePresence>
         </div>
