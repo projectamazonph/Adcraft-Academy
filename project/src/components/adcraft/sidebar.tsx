@@ -19,7 +19,7 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
-export type NavTab = 'dashboard' | 'modules' | 'simulations' | 'mentor' | 'leaderboard' | 'analytics';
+export type NavTab = 'dashboard' | 'modules' | 'simulations' | 'mentor' | 'leaderboard' | 'analytics' | 'admin' | 'certificate';
 
 interface SidebarProps {
   activeTab: NavTab;
@@ -36,6 +36,8 @@ const navItems: { id: NavTab; label: string; icon: typeof LayoutDashboard }[] = 
   { id: 'mentor', label: 'AI Mentor', icon: Bot },
   { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
   { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { id: 'certificate', label: 'Certificate', icon: Award },
+  { id: 'admin', label: 'Admin', icon: BarChart3 },
 ];
 
 export function Sidebar({

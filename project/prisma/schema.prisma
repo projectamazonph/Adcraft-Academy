@@ -443,6 +443,19 @@ model AiChatMessage {
 
 
 // ponytail: event tracking for analytics
+
+// ponytail: time-limited XP events
+model XpMultiplier {
+  id        String   @id @default(cuid())
+  name      String
+  multiplier Float    @default(2.0)
+  startsAt  DateTime
+  endsAt    DateTime
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([active, startsAt, endsAt])
+}
 model EventLog {
   id        String   @id @default(cuid())
   userId    String

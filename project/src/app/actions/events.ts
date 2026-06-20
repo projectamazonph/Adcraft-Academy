@@ -55,3 +55,18 @@ export async function getEventLog(
     return { success: false, error: 'Failed to load events', code: 'EVENTS_ERROR' };
   }
 }
+
+// ponytail: active XP multipliers
+export async function getActiveMultipliers(): Promise<{ name: string; multiplier: number } | null> {
+  try {
+    const now = new Date();
+    const m = await db.xpMultiplier.findFirst({
+      where: { active: true, startsAt: { lte: now }, endsAt: { gte: now } },
+      orderBy: { multiplier: 'desc' },
+      select: { name: true, multiplier: true },
+    });
+    return m;
+  } catch {
+    return null;
+  }
+}

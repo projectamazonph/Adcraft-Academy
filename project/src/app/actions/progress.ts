@@ -19,7 +19,7 @@
 import { db } from '@/lib/db';
 import { getAuthUserId } from '@/lib/auth-guard';
 import { logger } from '@/lib/logger';
-import { trackEvent } from './events';
+import { trackEvent, getActiveMultipliers } from './events';
 import type {
   ActionResult,
   MarkLessonCompleteOutput,
@@ -216,7 +216,7 @@ export async function markLessonComplete(
       success: true,
       data: {
         lessonSlug,
-        xpEarned,
+        finalXp,
         moduleStatus,
         lessonsCompletedInModule: completedInModule,
         totalLessonsInModule: moduleMeta.totalLessons,

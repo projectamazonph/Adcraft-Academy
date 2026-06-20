@@ -48,7 +48,10 @@ const LessonPlayer = dynamic(() => import('@/components/adcraft/lesson-player').
   loading: () => <div className="flex items-center justify-center h-96 text-sm text-muted-foreground">Loading Lesson...</div>,
 });
 import { Leaderboard } from '@/components/adcraft/leaderboard';
+import { getCheatSheet } from '@/app/actions/cheatsheet';
 import { AnalyticsDashboard } from '@/components/adcraft/analytics-dashboard';
+import { AdminAnalytics } from '@/components/adcraft/admin-analytics';
+import { CertificateGenerator } from '@/components/adcraft/certificate';
 import { getUserStats } from '@/app/actions/simulation';
 import { useSession } from 'next-auth/react';
 import { cn } from '@/lib/utils';
@@ -328,6 +331,8 @@ export default function Home() {
                 {activeTab === 'modules' && 'Learning Modules'}
                 {activeTab === 'simulations' && (activeSimulation === 'str-triage-arena' ? 'STR Triage Arena' : activeSimulation === 'bid-elevator' ? 'Bid Elevator' : activeSimulation === 'campaign-builder' ? 'Campaign Builder' : 'Simulations')}
                 {activeTab === 'leaderboard' && 'Leaderboard'}
+                {activeTab === 'admin' && 'Admin'}
+                {activeTab === 'certificate' && 'Certificate'}
                 {activeTab === 'analytics' && 'Analytics'}
                 {activeTab === 'mentor' && 'AI Mentor'}
               </span>
@@ -400,6 +405,8 @@ export default function Home() {
 
               {activeTab === 'leaderboard' && <Leaderboard />}
               {activeTab === 'analytics' && <AnalyticsDashboard />}
+              {activeTab === 'admin' && <AdminAnalytics />}
+              {activeTab === 'certificate' && <CertificateGenerator />}
             </motion.div>
           </AnimatePresence>
         </div>

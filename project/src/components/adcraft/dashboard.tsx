@@ -20,6 +20,7 @@ import { StatsRow } from './stats-row';
 import { ModuleCards } from './module-cards';
 import { SimulationCards } from './simulation-cards';
 import { getProgressOverview } from '@/app/actions/progress';
+import { getActiveMultipliers } from '@/app/actions/events';
 import type { NavTab } from './sidebar';
 import type { ProgressOverview, ModuleProgressItem } from '@/app/actions/types';
 
@@ -38,6 +39,7 @@ const ppcMetrics = [
 export function Dashboard({ onNavigate, xpOverride, levelOverride }: DashboardProps) {
   const [overview, setOverview] = useState<ProgressOverview | null>(null);
   const [loading, setLoading] = useState(true);
+  const [multiplier, setMultiplier] = useState<{ name: string; multiplier: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { data: session } = useSession();
 
@@ -59,6 +61,10 @@ export function Dashboard({ onNavigate, xpOverride, levelOverride }: DashboardPr
         console.error('[Dashboard] getProgressOverview error:', err);
       })
       .finally(() => setLoading(false));
+
+  useEffect(() => {
+    getActiveMultipliers().then(setMultiplier).catch(() => {});
+  }, []);
   }, []);
 
   const xp = xpOverride ?? overview?.xp ?? 0;
