@@ -1,155 +1,147 @@
 ---
-title: "Campaign Structure: Organizing for Control and Scale"
+title: "Campaign Structure: The Filing Cabinet Method"
 slug: "4.3-campaign-structure"
 moduleNumber: 4
 lessonNumber: 3
 type: "reading"
-estimatedMinutes: 14
-xpReward: 125
+estimatedMinutes: 15
+xpReward: 100
 ---
 
-# Campaign Structure: Organizing for Control and Scale
+# Campaign Structure: The Filing Cabinet Method
 
-Campaign structure is one of the most underestimated aspects of Amazon PPC. A well-structured account gives you surgical control over budgets and bids. A poorly structured one forces you to make blunt adjustments that waste money. This lesson teaches you the principles and patterns for organizing campaigns that scale.
+A messy campaign structure is the number one reason sellers waste money on Amazon PPC. It's not about having the "right" keywords — it's about organizing them so you can control, measure, and optimize each group independently.
 
-## Why Structure Matters
+> 🎯 **Analogy**: Campaign structure is like organizing a filing cabinet. If every document is in one big pile, you'll never find what you need when you need it. But if you have labeled folders organized by topic, pulling up the right document takes two seconds. PPC works the same way — organized campaigns let you find and fix problems fast.
 
-Imagine you have 200 keywords across 10 products, all dumped into a single campaign with a $100 daily budget. Your best keyword — one that converts at 20% with a $0.75 CPC — competes for the same budget as a keyword that converts at 3% with a $2.50 CPC. The poor performer eats most of the budget because it's more expensive, and your winner gets starved.
+## The Hierarchy
 
-**Structure exists to solve one core problem: resource allocation.** When similar keywords are grouped together with their own budgets and bid strategies, you can direct spend where it generates the most return.
-
-The three goals of good campaign structure:
-1. **Control** — Adjust bids and budgets at the right granularity
-2. **Measurement** — Know exactly what's working and what isn't
-3. **Scale** — Add new keywords, products, and strategies without creating a mess
-
-## The Four Structure Patterns
-
-### Pattern 1: Match Type Separation (The Standard)
-
-This is the most common and widely recommended structure. Create separate campaigns for each match type:
+Amazon's campaign structure has three levels:
 
 ```
-SP-Exact-[Product]
-  └── Ad Group: Hero Keywords (exact match)
-  └── Budget: $50/day, Bids: $1.50–$3.00
-
-SP-Phrase-[Product]
-  └── Ad Group: Category Terms (phrase match)
-  └── Budget: $30/day, Bids: $0.75–$1.50
-
-SP-Broad-[Product]
-  └── Ad Group: Discovery Terms (broad match)
-  └── Budget: $15/day, Bids: $0.30–$0.75
+Account
+ └── Campaign (has a budget, targeting type, and bid strategy)
+      └── Ad Group (has a default bid)
+           └── Keywords (each has its own bid)
 ```
 
-**Why separate by match type?** Because each match type has a fundamentally different purpose and bid level. Exact match keywords are proven converters — they deserve the highest bids and biggest budgets. Broad match keywords are research tools — they should have lower bids so you can afford to discover new terms without overspending.
+Each level serves a purpose:
 
-**The keyword waterfall:** This structure creates a natural "waterfall." Broad match campaigns discover new search terms. You review the search term report, identify high-performing terms, and add them as exact match keywords in your exact campaign. The phrase campaign serves as a middle layer for semi-validated terms.
+**Campaign** — Controls your daily budget and bidding strategy. This is your main organizational unit.
+**Ad Group** — Groups related keywords together. You can set different default bids per ad group.
+**Keywords** — The actual search terms you're targeting. Each can have its own bid.
 
-### Pattern 2: Product Separation
+## Why Structure Matters: A Real Example
 
-When selling multiple products, create separate campaigns per product or product group:
-
-```
-SP-Exact-CoffeeMaker-Pro
-  └── Budget: $40/day
-
-SP-Exact-CoffeeMaker-Basic
-  └── Budget: $25/day
-
-SP-Exact-TravelMug
-  └── Budget: $15/day
-```
-
-**Why separate by product?** Different products have different margins, conversion rates, and strategic importance. A hero product with 40% margin can afford higher ACoS targets than a clearance item with 10% margin. Separate campaigns let you set different budget caps and bid strategies.
-
-### Pattern 3: Purpose-Based Campaigns
-
-Organize campaigns by their strategic purpose rather than just match type:
-
-| Campaign | Purpose | Bid Strategy | Budget |
-|----------|---------|-------------|--------|
-| SP-Exact-Profit | Drive profitable sales | Target ACoS below margin | High |
-| SP-Exact-Visibility | Win top-of-search | Aggressive bids, accept higher ACoS | Medium |
-| SP-Broad-Research | Discover new terms | Low bids, harvest search terms | Low |
-| SP-PAT-Compete | Win from competitors | Moderate, bid on specific ASINs | Medium |
-| SP-PAT-Complement | Cross-sell | Lower bids, complementary ASINs | Low |
-
-This pattern gives you the most strategic control because each campaign has a clear objective and you can measure success against that objective.
-
-### Pattern 4: Hybrid (Recommended for Scale)
-
-Combine match type separation with product separation:
+Let's say you sell a $30 yoga block. Here's a **bad** structure:
 
 ```
-SP-Exact-CoffeeMaker-Pro
-  └── Ad Group 1: Brand terms (highest bids)
-  └── Ad Group 2: Product-specific terms
-  └── Ad Group 3: High-performer harvest
-
-SP-Phrase-CoffeeMaker-Pro
-  └── Ad Group: Category + use-case terms
-
-SP-Broad-CoffeeMaker-Pro
-  └── Ad Group: Discovery terms
-
-SP-PAT-CoffeeMaker-Pro-Compete
-  └── Ad Group: Competitor ASINs
-
-SP-PAT-CoffeeMaker-Pro-Complement
-  └── Ad Group: Complementary ASINs
+Campaign: "Yoga Block"
+  Ad Group: "Keywords"
+    Keywords: "yoga block", "yoga blocks", "foam yoga block", "yoga block set",
+              "exercise block", "yoga prop", "yoga brick", "gym block",
+              "fitness block", "yoga accessories" (10 keywords, all in one group)
 ```
 
-This is 5+ campaigns per product, which feels like a lot for a single SKU. But each campaign has a clear purpose, its own budget, and its own bid range. When you need to increase visibility for your hero product, you increase the budget on SP-Exact-CoffeeMaker-Pro — not on a catch-all campaign that also funds underperformers.
+**The problem**: You can't control bids separately. "Yoga block" (high intent, converts at 15%) and "yoga accessories" (broad, converts at 3%) are treated the same. You either overpay for the broad term or underbid on the high-converting term.
 
-## Naming Conventions
+Now here's a **good** structure:
 
-A good naming convention makes your account navigable at a glance. Use consistent, descriptive names:
+```
+Campaign: "YB-Exact-Proven"
+  Ad Group: "Best Keywords"
+    Keywords: "yoga block" ($1.50 bid), "foam yoga block" ($1.20 bid)
 
-**Format:** `[AdType]-[MatchType/Purpose]-[Product]-[Variant]`
+Campaign: "YB-Phrase-Discovery"
+  Ad Group: "Category Terms"
+    Keywords: "yoga block" ($0.80 bid), "exercise block" ($0.60 bid)
 
-Examples:
-- `SP-Exact-CoffeeMaker-Pro`
-- `SB-Video-CoffeeMaker-Line`
-- `SD-Retarget-CoffeeMaker-Pro`
-- `SP-PAT-Compete-CoffeeMaker-Pro`
+Campaign: "YB-Broad-Research"
+  Ad Group: "Broad Terms"
+    Keywords: "yoga block" ($0.40 bid), "yoga prop" ($0.35 bid)
 
-Avoid vague names like "Campaign 1" or "Test Campaign." Three months from now, you won't remember what "Test Campaign" was testing.
+Campaign: "YB-PAT-Competitors"
+  Ad Group: "Competitor ASINs"
+    Keywords: (product targeting — competitor ASINs)
+```
 
-## Budget Setting Principles
+Now you can:
+- Spend more on proven keywords (exact match, highest bids)
+- Discover new terms cheaply (broad match, lowest bids)
+- See exactly which match type drives the most profitable traffic
+- Control daily budget per campaign type
 
-Setting budgets is not a one-time decision. It's an ongoing process that starts with smart initial values.
+> 💡 **Tip**: A good naming convention makes your campaigns instantly recognizable. Use a system like: `[Product]-[MatchType]-[Purpose]`. Examples: `YB-Exact-Proven`, `YB-Phrase-Discovery`, `YB-Broad-Research`.
 
-**The minimum viable budget rule:** Each campaign needs enough daily budget to generate at least 10 clicks per day. If your average CPC is $1.00, your minimum budget is $10/day. Below this threshold, you won't get enough data to make optimization decisions.
+## The Campaign Structure Template
 
-**The 80/20 allocation:**
-- 80% of budget to proven campaigns (exact match, retargeting, brand defense)
-- 20% of budget to experimental campaigns (broad match, new product launches, competitor conquesting)
+For a single product, here's the structure most PPC managers use:
 
-**The scaling trigger:** When a campaign consistently hits its daily budget before the end of the day AND is hitting your ACoS target, increase the budget by 20–30%. If ACoS is above target, don't increase budget — adjust bids first.
+### Exact Match Campaign
+**Purpose**: Capture high-intent, proven keywords at maximum efficiency.
+- Contains only exact match keywords
+- Highest bids — these are your money-makers
+- Tight negative keyword list
+- Moderate daily budget
 
-## Common Structural Mistakes
+### Phrase Match Campaign
+**Purpose**: Discover new search terms that might convert.
+- Contains phrase match keywords
+- Medium bids — you're exploring, not gambling
+- Review search term report weekly for new exact match opportunities
+- Moderate daily budget
 
-**Mistake 1: The mega-campaign.** One campaign with 500 keywords, all match types, multiple products. You can't control anything at this level. Break it up.
+### Broad Match Campaign
+**Purpose**: Cast a wide net to find opportunities you haven't thought of.
+- Contains broad match keywords
+- Lowest bids — you're researching, not investing heavily
+- Aggressive negative keyword list to cut waste
+- Small daily budget
 
-**Mistake 2: Too many tiny campaigns.** The opposite extreme — 100 campaigns with $2/day budgets each. You'll never get enough data per campaign to optimize. Consolidate small campaigns or increase budgets.
+### Product Targeting Campaign
+**Purpose**: Appear on competitor and complementary product pages.
+- Contains competitor ASINs and category targets
+- Medium bids
+- Review placement data to see which competitor pages convert best
 
-**Mistake 3: Mixing match types in one ad group.** Exact match keywords with $2.00 bids and broad match keywords with $0.50 bids in the same ad group means Amazon will overspend on broad matches. Separate them.
+## Naming Conventions That Save Time
 
-**Mistake 4: No negative keyword strategy across campaigns.** If your exact campaign targets "coffee maker" and your broad campaign targets "coffee," the broad campaign will show for "coffee maker" — competing with your own exact campaign. Add "coffee maker" as a negative exact in the broad campaign.
+A consistent naming system helps you:
+- Find campaigns fast in a long list
+- Understand campaign purpose at a glance
+- Filter and sort by product, match type, or purpose
 
-**Mistake 5: Forgetting to set end dates on promotional campaigns.** Holiday or launch campaigns with temporarily high bids should have end dates. Without them, you'll forget and keep spending at elevated rates after the promotion ends.
+**Recommended format**: `[Abbreviated Product]-[Match Type]-[Purpose]`
 
-## Key Takeaways
+| Campaign Name | Product | Match | Purpose |
+|--------------|---------|-------|---------|
+| YB-Exact-Proven | Yoga Block | Exact | High-converting keywords |
+| YB-Phrase-Discovery | Yoga Block | Phrase | Finding new terms |
+| YB-Broad-Research | Yoga Block | Broad | Wide research |
+| YB-PAT-Competitors | Yoga Block | Product | Competitor targeting |
+| WB-Exact-Proven | Water Bottle | Exact | High-converting keywords |
 
-- Campaign structure solves the resource allocation problem — similar keywords need their own budget and bid controls
-- Match type separation is the foundational pattern: separate campaigns for exact, phrase, and broad
-- Product separation matters when products have different margins and strategic importance
-- Purpose-based campaigns give the most strategic control for experienced advertisers
-- Good naming conventions make your account navigable; use `[Type]-[Match]-[Product]` format
-- Each campaign needs enough budget for at least 10 clicks/day to generate actionable data
+> ⚠️ **Watch out**: Don't use names like "Campaign 1" or "Test Campaign." When you have 15+ campaigns, meaningless names make management a nightmare.
+
+## Negative Keywords: The Unsung Hero
+
+Every campaign should have negative keywords. They prevent your ads from showing for irrelevant searches.
+
+**Campaign-level negatives**: Apply to all ad groups in the campaign. Use for universally irrelevant terms.
+
+**Cross-campaign negatives**: Add your exact match keywords as negatives in your broad match campaign. This prevents them from competing with each other.
+
+### Worked Example: Cross-Campaign Negatives
+
+Your exact match campaign targets "yoga block" at $1.50 bid.
+Your broad match campaign also targets "yoga block" at $0.40 bid.
+
+Without negatives, both campaigns might compete for the same "yoga block" search. The broad campaign could steal budget from the exact campaign — spending $0.40 on a click the exact campaign would have won anyway.
+
+**Fix**: Add "yoga block" as a negative exact keyword in the broad campaign. Now the exact campaign handles "yoga block" searches, and the broad campaign focuses on other terms.
+
+> 📌 **Key Takeaway**: Good campaign structure isn't about being organized for its own sake — it's about being able to control bids, measure performance, and optimize by segment. Separate your keywords by match type and purpose, name them clearly, and use negatives to prevent overlap.
 
 ---
 
-*In the next lesson, we'll bring it all together and prepare for the Campaign Builder simulation, where you'll design a complete campaign architecture from scratch.*
+*Next up: Putting it all together — a practice exercise where you design a complete campaign structure for a real product.*

@@ -10,155 +10,148 @@ xpReward: 100
 
 # STR Triage Prep: Ready to Triage
 
-The STR Triage Arena simulation puts you in the role of a PPC manager analyzing 20 search terms from a real campaign. For each term, you must decide: keep it, adjust it, or kill it. This lesson prepares you with the decision framework and tactical knowledge to triage effectively.
+You've learned how to read search term data and how to use negative keywords. Now it's time for the final boss: the **STR Triage Arena** — where you'll analyze 20 search terms under pressure and make a decision for each one.
+
+> 🎯 **Analogy**: Triage is what emergency room doctors do when multiple patients arrive at once. They quickly assess who needs immediate care, who can wait, and who doesn't need treatment at all. You're doing the same thing with search terms — quickly deciding which ones deserve budget, which need adjustment, and which should be cut.
 
 ## The Five Actions
 
-In the STR Triage Arena, you have five possible actions for each search term:
+For each search term in the simulation, you have five options:
 
-### Action 1: Keep
+### Action 1: Keep ✅
 
-**When to use:** The search term is performing well — good CTR, acceptable ACoS, generating profitable sales.
+**When to use**: The term is performing well — good CTR, acceptable ACoS, generating profitable sales. No changes needed.
 
-**What it means:** No changes needed. Continue running this term as-is.
-
-**Decision criteria:**
-- ACoS is at or below your target
-- CTR is above category average (typically >0.5%)
+**Decision criteria**:
+- ACoS at or below your target
+- CTR above 0.5%
 - Generating consistent orders
-- No obvious relevance issues
+- No relevance issues
 
-### Action 2: Add to Exact (Harvest)
+> 💡 **Tip**: "Keep" doesn't mean "ignore." Keep means the term is doing its job. Revisit it next week to make sure it's still performing.
 
-**When to use:** The search term is performing well but is currently only triggering through broad or phrase match. Adding it as an exact match keyword gives you direct bid control and budget priority.
+### Action 2: Harvest to Exact 🏆
 
-**What it means:** Promote this term from broad/phrase match discovery into your exact match campaign where it gets dedicated budget and precise bid management.
+**When to use**: The term is performing well but currently only triggering through broad or phrase match. Harvesting gives you direct bid control and budget priority.
 
-**Decision criteria:**
+**Decision criteria**:
 - ACoS below target
 - At least 15–20 clicks of data
 - Not already an exact match keyword
-- High commercial intent (specific product-related term)
+- High commercial intent (specific product term)
 
-**Important:** When you harvest a term to exact match, you should also consider adding it as a negative keyword in the broad/phrase campaign to prevent the two campaigns from competing for the same search.
+When you harvest, also consider adding the term as a negative in the broad/phrase campaign to prevent the two campaigns from competing for the same search.
 
-### Action 3: Decrease Bid
+### Action 3: Decrease Bid 📉
 
-**When to use:** The search term is relevant and generating some sales, but ACoS is above target because the bid is too high relative to conversion value.
+**When to use**: The term is relevant and generating sales, but ACoS is above target because the bid is too high.
 
-**What it means:** Lower the bid for this keyword/search term to bring ACoS back toward target.
-
-**Decision criteria:**
+**Decision criteria**:
 - Term is relevant to your product
 - Generating orders, but ACoS exceeds target
 - CVR is reasonable (above 3–5%)
-- The math works if you lower CPC — reducing bid by 20–30% could bring ACoS below target
+- Reducing bid by 20–30% could bring ACoS below target
 
-**How much to decrease:** Calculate the target CPC using: `Target CPC = Price × CVR × Target ACoS`. If your current CPC is above this, reduce your bid to bring CPC in line. A typical decrease is 15–30%.
+**How much**: Calculate target CPC = `Price × CVR × Target ACoS`. If your current CPC is above this, reduce accordingly.
 
-### Action 4: Add Negative Keyword
+### Action 4: Add Negative Keyword 🚫
 
-**When to use:** The search term is irrelevant to your product and generating wasted spend with no reasonable prospect of improvement.
+**When to use**: The term is irrelevant and generating wasted spend with no prospect of improvement.
 
-**What it means:** Block this search term entirely. Your ad will never show for it again.
+**Decision criteria**:
+- Zero orders after 10+ clicks
+- Clearly irrelevant to your product
+- Low CTR (below 0.3%)
+- No strategic reason to keep
 
-**Decision criteria:**
-- Zero orders after meaningful click volume (10+ clicks)
-- Clearly irrelevant to your product (wrong product type, wrong feature, wrong intent)
-- Low CTR (below 0.3%) indicating shoppers don't find your ad relevant
-- No strategic reason to keep (not a brand defense term, not a launch priority)
+**Match type**: Negative exact for specific terms, negative phrase for broad patterns.
 
-**Choose match type wisely:**
-- Use negative exact for specific irrelevant terms
-- Use negative phrase for broad irrelevant patterns (e.g., "cheap" blocks all cheap-related searches)
+### Action 5: Increase Bid 📈
 
-### Action 5: Increase Bid
+**When to use**: The term is high-potential — converting well and could capture more volume with a higher bid.
 
-**When to use:** The search term is high-potential — it's converting well and could capture more volume with a higher bid to win better ad positions.
-
-**What it means:** Raise the bid to compete more aggressively for this search term.
-
-**Decision criteria:**
-- ACoS is well below target (you have room to spend more per click)
+**Decision criteria**:
+- ACoS well below target (room to spend more per click)
 - Strong CTR indicating high relevance
 - Good CVR with consistent orders
-- You're not winning top positions and could capture more volume
+- Not winning top positions
 
-**How much to increase:** Calculate how much headroom you have. If current ACoS is 12% and target is 25%, you could roughly double your CPC and still be profitable. A typical increase is 20–50%.
+**How much**: If current ACoS is 12% and target is 25%, you could roughly double your CPC. A typical increase is 20–50%.
+
+> 📌 **Key Takeaway**: Five actions cover every situation. The hard part isn't knowing what the actions are — it's reading the data quickly and choosing the right one. That's what practice builds.
 
 ## The Decision Flowchart
 
-For each search term, work through this flowchart:
+For each search term, work through this:
 
-```
-Is the search term relevant to my product?
-├── NO → Add Negative Keyword
-└── YES
-    ├── Is ACoS at or below target?
-    │   ├── YES
-    │   │   ├── Is it already an exact match keyword?
-    │   │   │   ├── YES → Keep (or Increase Bid if volume-limited)
-    │   │   │   └── NO → Add to Exact (Harvest)
-    │   └── NO (ACoS above target)
-    │       ├── Is it generating any orders?
-    │       │   ├── YES → Decrease Bid
-    │       │   └── NO (spend with zero orders)
-    │       │           ├── After 10+ clicks? → Add Negative Keyword
-    │       │           └── Under 10 clicks? → Monitor (Keep for now)
-    └── Is CTR very low (<0.3%) despite relevance?
-        └── YES → Likely a relevance mismatch → Add Negative Keyword
-```
+1. **Is it relevant to my product?**
+   - No → Add Negative Keyword
+   - Yes → Continue
 
-## Reading the Data Grid
+2. **Is ACoS at or below target?**
+   - Yes → Is it already exact match?
+     - Yes → Keep (or increase bid if volume-limited)
+     - No → Harvest to Exact
+   - No → Is it generating orders?
+     - Yes → Decrease Bid
+     - No → After 10+ clicks? → Negative. Under 10 clicks? → Monitor.
 
-In the simulation, each search term will be displayed with key metrics. Here's how to prioritize your attention:
+> 💡 **Tip**: When in doubt, look at relevance first. A term with terrible ACoS but high relevance just needs a lower bid. A term with great ACoS but low relevance is a ticking time bomb — it'll waste money as volume grows.
 
-**First pass — scan for obvious negatives:** Look for zero orders + high spend + irrelevant terms. These are the easiest decisions and the biggest cost savings.
+## Reading the Data Grid Efficiently
 
-**Second pass — identify winners:** Look for low ACoS + consistent orders. These are the terms to harvest or increase bids on.
+In the simulation, you'll see 20 search terms with metrics. Here's how to triage fast:
 
-**Third pass — handle the middle:** Terms with orders but high ACoS need bid decreases. Terms with potential but low data need monitoring.
+**First pass — scan for obvious negatives**: Zero orders + high spend + irrelevant terms. Easy decisions, biggest cost savings.
 
-**Efficiency tip:** Start with the highest-spend terms. A 50% ACoS on $100 of spend wastes $50. A 50% ACoS on $10 of spend only wastes $5. Prioritize where the money is.
+**Second pass — identify winners**: Low ACoS + consistent orders. These get harvested or bid increases.
 
-## Triage Speed and Confidence
+**Third pass — handle the middle**: Orders but high ACoS → decrease bid. Potential but low data → monitor.
 
-In the real world, you'd analyze every search term with full historical data. In the simulation, you'll need to make faster decisions based on the data presented. Here are confidence shortcuts:
+> 🎯 **Analogy**: Think of it like sorting laundry. First you pull out the obvious darks and whites (easy negatives and clear winners). Then you sort the colors (the nuanced middle). Don't try to sort everything at once — batch similar decisions.
 
-**High-confidence decisions:**
-- Irrelevant term with zero orders → Negative (no-brainer)
-- High-converting term at low ACoS → Harvest (clear winner)
-- Relevant term with orders but ACoS 2x+ target → Decrease bid (clear math)
+**Efficiency tip**: Start with highest-spend terms. A 50% ACoS on $100 of spend wastes $50. A 50% ACoS on $10 only wastes $5. Prioritize where the money is.
 
-**Lower-confidence decisions:**
-- Relevant term with 1 order after 5 clicks → Could be luck. Monitor.
-- Term at exactly target ACoS → Keep. Don't optimize what's already working.
-- Broad category term with moderate performance → Context-dependent. Consider the strategic value.
+## Common Triage Mistakes
 
-## Common Mistakes in Triage
+**Negativing too aggressively.** Not every underperforming term should be negatived. Some just need lower bids. Reserve negatives for genuinely irrelevant traffic.
 
-**Mistake 1: Negativing terms too aggressively.** Not every underperforming term should be negatived. Some just need lower bids. Reserve negatives for genuinely irrelevant traffic.
+**Forgetting to harvest winners.** When a term performs well in broad match, the default action should be "harvest to exact" — not "keep." Keeping it in broad means it shares budget with less efficient terms.
 
-**Mistake 2: Forgetting to harvest winners.** When a search term is performing well in a broad match campaign, the default action should be "harvest to exact" — not "keep." Keeping it in broad means it shares budget with less efficient terms.
+**Ignoring CTR.** Low CTR (below 0.3%) means shoppers see your ad and don't click. That's a strong relevance mismatch signal, even if the keyword seems relevant on paper.
 
-**Mistake 3: Ignoring CTR as a signal.** Low CTR (below 0.3%) means shoppers see your ad and choose not to click it. This is a strong signal that the search term doesn't match your product, even if the keyword seems relevant on paper.
+**Deciding on too little data.** 3 clicks and 0 orders isn't necessarily bad. 30 clicks and 0 orders is almost certainly a negative candidate.
 
-**Mistake 4: Making decisions on too little data.** A term with 3 clicks and 0 orders isn't necessarily bad — it hasn't had enough traffic to evaluate. But a term with 30 clicks and 0 orders is almost certainly a negative candidate.
+**Ignoring the ACoS target.** A 20% ACoS is great if your target is 25%, but terrible if your target is 15%. Always evaluate relative to the scenario's stated target.
 
-**Mistake 5: Not considering the ACoS target.** Your target ACoS changes what counts as "good" or "bad" performance. A 20% ACoS is excellent if your target is 25%, but terrible if your target is 15%. Always evaluate relative to the scenario's stated target.
+> ⚠️ **Watch out**: The #1 triage mistake is being too aggressive with negatives on terms that are relevant but just expensive. If a term converts but costs too much, lower the bid — don't kill it.
+
+## Try This: Quick Triage Practice
+
+You have 5 seconds per term. What's your action?
+
+1. "stainless steel milk frother" — ACoS 18%, 25 clicks, 4 orders, target ACoS 25%
+2. "cheap milk frother" — ACoS 0%, 12 clicks, 0 orders, target ACoS 25%
+3. "milk frother" — ACoS 35%, 40 clicks, 5 orders, target ACoS 25%, not exact match
+4. "electric milk frother" — ACoS 8%, 30 clicks, 8 orders, target ACoS 25%
+5. "milk frother for kids" — ACoS 0%, 6 clicks, 0 orders, target ACoS 25%
+
+> 💡 **Answers**: 1. Keep (or harvest if not exact — performing well). 2. Negative (irrelevant, zero conversions). 3. Decrease bid (relevant but ACoS above target). 4. Harvest to exact (strong performer, low ACoS). 5. Keep for now (under 10 clicks — monitor before negativing).
 
 ## Ready to Triage
 
-You now have the framework to make smart triage decisions:
+You've got everything you need:
 
-- **Keep** what's working at target ACoS
-- **Harvest** winners to exact match for better control
-- **Decrease bids** on terms with potential but high ACoS
-- **Increase bids** on proven performers with room to grow
-- **Add negatives** on irrelevant or consistently unprofitable terms
+- ✅ You understand search term analysis and the five categories
+- ✅ You know negative keyword strategy and when to use it
+- ✅ You can calculate max CPC and know your bid ceiling
+- ✅ You have a decision flowchart for every situation
+- ✅ You know to triage by highest-spend terms first
 
-Launch the STR Triage Arena simulation when you're ready. You'll face 20 search terms — triage each one with purpose, using the decision flowchart and the data in front of you.
+> 📌 **Key Takeaway**: The STR Triage Arena is the most data-intensive simulation in AdCraft. It tests everything you've learned — metrics, analysis, bid math, and judgment. Master this and you're ready to manage real Amazon PPC campaigns.
+
+Launch the STR Triage Arena when you're ready. Triage 20 terms with purpose. Good luck!
 
 ---
 
-*After completing the simulation, review your scoring breakdown. The STR Triage Arena is the most data-intensive simulation in AdCraft — mastering it means you're ready to manage real Amazon PPC campaigns with confidence.*
+*After the simulation, review your scoring breakdown. The Triage Arena is where analytical skill meets speed. If you can triage 20 terms accurately, you can handle any real-world search term report with confidence.*
