@@ -43,22 +43,11 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Link to Vercel project
-        run: vercel link --project ${{ secrets.VERCEL_PROJECT_ID }} --scope ryandabao1982s-projects --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build with Next.js
+        run: npx next build
 
-      - name: Pull Vercel project settings
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Override env vars for build
-        run: |
-          cat > .vercel/.env.production.local << 'EOF'
-          DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/adcraft?schema=public"
-          NEXTAUTH_SECRET="placeholder-secret-for-build"
-          NEXTAUTH_URL="https://adcraft-academy.vercel.app"
-          EOF
-
-      - name: Build with Vercel
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Vercel output
+        run: npx vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Production
         run: vercel deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
