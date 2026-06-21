@@ -40,6 +40,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
       - name: Pull Vercel project settings
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
