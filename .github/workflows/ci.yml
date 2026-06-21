@@ -23,7 +23,7 @@ jobs:
       - run: npx prisma generate
       - run: npm test
 
-  build-and-deploy:
+  deploy:
     needs: test
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Link to Vercel project
+      - name: Link project
         run: |
           mkdir -p .vercel
           cat > .vercel/project.json << EOF
@@ -54,24 +54,5 @@ jobs:
           }
           EOF
 
-      - name: Pull Vercel project settings
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Override env vars for build
-        run: |
-          cat > .vercel/.env.production.local << 'EOF'
-          DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/adcraft?schema=public"
-          NEXTAUTH_SECRET="placeholder-secret-for-build"
-          NEXTAUTH_URL="https://adcraft-academy.vercel.app"
-          EOF
-
-      - name: Build with Next.js
-        run: npx next build
-
-      - name: Build Vercel output
-        run: |
-          export PATH=$PATH:/usr/local/bin:/usr/bin:/bin
-          npx vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy to Production
-        run: vercel deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel
+        run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
