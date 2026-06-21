@@ -53,6 +53,7 @@ import { AnalyticsDashboard } from '@/components/adcraft/analytics-dashboard';
 import { AdminAnalytics } from '@/components/adcraft/admin-analytics';
 import { CertificateManager } from '@/components/adcraft/certificate-manager';
 import { getUserStats } from '@/app/actions/simulation';
+import { TeamDashboard } from '@/components/adcraft/team-dashboard';
 import { useSession } from 'next-auth/react';
 import { cn } from '@/lib/utils';
 

@@ -22,7 +22,7 @@ model User {
   name          String?
   image         String?
   passwordHash  String?   // Nullable for OAuth-only users; required for Credentials auth
-  orgId         String?   // org_id column prep — nullable for single-tenant MVP
+  orgId         String?   // FK to Organization (multi-tenant prep) — nullable for single-tenant MVP
   role          UserRole  @default(STUDENT)
   xp            Int       @default(0)
   level         Int       @default(1)
@@ -40,6 +40,7 @@ model User {
   badges             UserBadge[]
   certificates       Certificate[]
   eventLogs          EventLog[]
+  teamMemberships    TeamMember[]
 
   @@index([orgId])
   @@index([email])
@@ -173,7 +174,7 @@ model LessonProgress {
 
 model Quiz {
   id            String    @id @default(cuid())
-  orgId         String?   // org_id column prep
+  orgId         String?   // FK to Organization (multi-tenant prep)
   lessonId      String    @unique // One quiz per lesson
   title         String
   description   String    @default("")
@@ -488,6 +489,47 @@ enum LessonType {
 // CERTIFICATE LIFECYCLE
 // ============================================================================
 
+
+// ============================================================================
+// ORGANIZATION & TEAM (Phase 3)
+// ============================================================================
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  settings  String?  // JSONB — org-level settings
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members   TeamMember[]
+
+  @@index([slug])
+}
+
+model TeamMember {
+  id        String       @id @default(cuid())
+  orgId     String
+  userId    String
+  role      TeamRole     @default(MEMBER)
+  joinedAt  DateTime     @default(now())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  org  Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  user User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, userId])
+  @@index([orgId])
+  @@index([userId])
+}
+
+enum TeamRole {
+  OWNER
+  MANAGER
+  INSTRUCTOR
+  MEMBER
+}
 model Certificate {
   id              String   @id @default(cuid())
   userId          String
