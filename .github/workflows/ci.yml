@@ -65,8 +65,13 @@ jobs:
           NEXTAUTH_URL="https://adcraft-academy.vercel.app"
           EOF
 
-      - name: Build with Vercel
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build with Next.js
+        run: npx next build
+
+      - name: Build Vercel output
+        run: |
+          export PATH=$PATH:/usr/local/bin:/usr/bin:/bin
+          npx vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Production
         run: vercel deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
