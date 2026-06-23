@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ==========================================================================
+   Apple-Inspired Design Tokens — AdCraft Academy
+   Single accent: Emerald (PPC = profit = green)
+   Dark mode first, liquid glass surfaces, spring motion
+   ========================================================================== */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -43,23 +49,31 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-emerald-glow: var(--emerald-glow);
-  --color-slate-950: var(--slate-950);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+  --color-glass-highlight: var(--glass-highlight);
+  --shadow-glass: var(--shadow-glass);
 }
 
+/* ==========================================================================
+   Base Palette — Dark First
+   ========================================================================== */
+
 :root {
-  --radius: 0.625rem;
+  --radius: 0.75rem;
+  /* Light mode (optional secondary) */
   --background: oklch(0.985 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --foreground: oklch(0.12 0.01 260);
+  --card: oklch(0.995 0 0);
+  --card-foreground: oklch(0.12 0.01 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.12 0.01 260);
   --primary: oklch(0.527 0.17 155.5);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.96 0.01 155);
   --secondary-foreground: oklch(0.205 0.02 155);
   --muted: oklch(0.96 0.005 155);
-  --muted-foreground: oklch(0.556 0.02 155);
+  --muted-foreground: oklch(0.55 0.02 260);
   --accent: oklch(0.94 0.02 155);
   --accent-foreground: oklch(0.205 0.02 155);
   --destructive: oklch(0.577 0.245 27.325);
@@ -72,52 +86,73 @@
   --chart-4: oklch(0.6 0.2 15);
   --chart-5: oklch(0.55 0.2 300);
   --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-foreground: oklch(0.12 0.01 260);
   --sidebar-primary: oklch(0.527 0.17 155.5);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.96 0.01 155);
   --sidebar-accent-foreground: oklch(0.205 0.02 155);
   --sidebar-border: oklch(0.9 0.01 155);
   --sidebar-ring: oklch(0.527 0.17 155.5);
+
+  /* Apple-style glass tokens */
+  --glass: oklch(1 0 0 / 6%);
+  --glass-border: oklch(1 0 0 / 10%);
+  --glass-highlight: oklch(1 0 0 / 40%);
+  --shadow-glass: 0 8px 32px oklch(0 0 0 / 12%), 0 1px 2px oklch(0 0 0 / 6%);
+
+  /* Glow tokens */
   --emerald-glow: oklch(0.527 0.17 155.5 / 20%);
-  --slate-950: oklch(0.13 0.01 260);
 }
 
+/* ==========================================================================
+   Dark Mode — Apple Off-Black
+   ========================================================================== */
+
 .dark {
-  --background: oklch(0.13 0.01 260);
-  --foreground: oklch(0.95 0.01 155);
-  --card: oklch(0.17 0.015 260);
-  --card-foreground: oklch(0.95 0.01 155);
-  --popover: oklch(0.17 0.015 260);
-  --popover-foreground: oklch(0.95 0.01 155);
-  --primary: oklch(0.627 0.194 149.2);
-  --primary-foreground: oklch(0.13 0.01 260);
-  --secondary: oklch(0.22 0.02 260);
-  --secondary-foreground: oklch(0.9 0.01 155);
-  --muted: oklch(0.22 0.02 260);
-  --muted-foreground: oklch(0.65 0.02 260);
-  --accent: oklch(0.22 0.025 260);
-  --accent-foreground: oklch(0.9 0.01 155);
-  --destructive: oklch(0.704 0.191 22.216);
+  --background: oklch(0.11 0.003 260);
+  --foreground: oklch(0.95 0.005 155);
+  --card: oklch(0.16 0.008 260);
+  --card-foreground: oklch(0.95 0.005 155);
+  --popover: oklch(0.16 0.008 260);
+  --popover-foreground: oklch(0.95 0.005 155);
+  --primary: oklch(0.62 0.18 149.2);
+  --primary-foreground: oklch(0.11 0.003 260);
+  --secondary: oklch(0.2 0.01 260);
+  --secondary-foreground: oklch(0.9 0.005 155);
+  --muted: oklch(0.2 0.008 260);
+  --muted-foreground: oklch(0.6 0.01 260);
+  --accent: oklch(0.2 0.015 260);
+  --accent-foreground: oklch(0.9 0.005 155);
+  --destructive: oklch(0.7 0.19 22.216);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.627 0.194 149.2);
-  --chart-1: oklch(0.627 0.194 149.2);
+  --ring: oklch(0.62 0.18 149.2);
+  --chart-1: oklch(0.62 0.18 149.2);
   --chart-2: oklch(0.6 0.15 200);
   --chart-3: oklch(0.65 0.18 75);
   --chart-4: oklch(0.6 0.2 15);
   --chart-5: oklch(0.55 0.2 300);
-  --sidebar: oklch(0.15 0.015 260);
-  --sidebar-foreground: oklch(0.95 0.01 155);
-  --sidebar-primary: oklch(0.627 0.194 149.2);
+  --sidebar: oklch(0.14 0.005 260);
+  --sidebar-foreground: oklch(0.95 0.005 155);
+  --sidebar-primary: oklch(0.62 0.18 149.2);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.22 0.025 260);
-  --sidebar-accent-foreground: oklch(0.9 0.01 155);
+  --sidebar-accent: oklch(0.2 0.015 260);
+  --sidebar-accent-foreground: oklch(0.9 0.005 155);
   --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.627 0.194 149.2);
-  --emerald-glow: oklch(0.627 0.194 149.2 / 15%);
-  --slate-950: oklch(0.11 0.01 260);
+  --sidebar-ring: oklch(0.62 0.18 149.2);
+
+  /* Dark mode glass — slightly brighter to pop off dark bg */
+  --glass: oklch(1 0 0 / 8%);
+  --glass-border: oklch(1 0 0 / 12%);
+  --glass-highlight: oklch(1 0 0 / 50%);
+  --shadow-glass: 0 8px 32px oklch(0 0 0 / 30%), 0 1px 2px oklch(0 0 0 / 10%);
+
+  --emerald-glow: oklch(0.62 0.18 149.2 / 15%);
 }
+
+/* ==========================================================================
+   Base Layer
+   ========================================================================== */
 
 @layer base {
   * {
@@ -125,15 +160,266 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  /* Force dark mode background on html.dark */
   html.dark {
     background-color: var(--background);
     color: var(--foreground);
   }
 }
 
-/* Custom scrollbar styling */
+/* ==========================================================================
+   Apple Liquid-Glass Web Approximation
+   ========================================================================== */
+
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--glass-border);
+  background:
+    linear-gradient(135deg, oklch(1 1 0 / 0.28), oklch(1 1 0 / 0.06)),
+    var(--glass);
+  backdrop-filter: blur(24px) saturate(180%) contrast(1.05);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) contrast(1.05);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 20% 0%, oklch(1 1 0 / 0.50), transparent 40%),
+    linear-gradient(90deg, oklch(1 1 0 / 0.15), transparent 42%, oklch(1 1 0 / 0.10));
+  pointer-events: none;
+}
+
+.glass-panel::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid var(--glass-highlight);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-panel {
+    background: var(--card);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .glass-panel::before,
+  .glass-panel::after {
+    display: none;
+  }
+}
+
+/* Sidebar-specific glass — more subtle */
+.glass-sidebar {
+  background: var(--sidebar);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  border-right: 1px solid var(--sidebar-border);
+}
+
+/* ==========================================================================
+   Apple-Style Card Variants
+   ========================================================================== */
+
+/* Premium elevated card */
+.card-premium {
+  position: relative;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.04);
+  transition: box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+              transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.card-premium:hover {
+  box-shadow: 0 8px 32px oklch(0 0 0 / 0.12), 0 2px 8px oklch(0 0 0 / 0.06);
+  transform: translateY(-2px);
+}
+
+/* Glass card — subtle frosted */
+.card-glass {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--glass-border);
+  background:
+    linear-gradient(135deg, oklch(1 1 0 / 0.20), oklch(1 1 0 / 0.04)),
+    var(--glass);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: var(--shadow-glass);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+              box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.card-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 20% 0%, oklch(1 1 0 / 0.35), transparent 40%);
+  pointer-events: none;
+}
+
+.card-glass:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 48px oklch(0 0 0 / 0.20), 0 2px 8px oklch(0 0 0 / 0.08);
+}
+
+/* Card bezel — Apple-style pinstripe outer shell */
+.card-bezel {
+  @apply p-[1px] rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02];
+}
+.card-bezel-dark {
+  @apply p-[1px] rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent;
+}
+.card-core {
+  @apply rounded-[calc(1rem-1px)] bg-card;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+/* ==========================================================================
+   Apple-Style Shadows
+   ========================================================================== */
+
+.shadow-apple-sm {
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 1px 1px oklch(0 0 0 / 0.02);
+}
+.shadow-apple-md {
+  box-shadow: 0 4px 16px oklch(0 0 0 / 0.08), 0 1px 2px oklch(0 0 0 / 0.04);
+}
+.shadow-apple-lg {
+  box-shadow: 0 8px 32px oklch(0 0 0 / 0.12), 0 2px 8px oklch(0 0 0 / 0.06);
+}
+.shadow-apple-xl {
+  box-shadow: 0 16px 48px oklch(0 0 0 / 0.16), 0 4px 16px oklch(0 0 0 / 0.08);
+}
+
+/* ==========================================================================
+   Enhanced Emerald Glow
+   ========================================================================== */
+
+.emerald-glow {
+  box-shadow: 0 0 20px oklch(0.62 0.18 149.2 / 15%),
+              0 0 60px oklch(0.62 0.18 149.2 / 5%);
+}
+
+/* ==========================================================================
+   Spring Animation Tokens
+   ========================================================================== */
+
+:root {
+  --spring-standard: cubic-bezier(0.32, 0.72, 0, 1);
+  --spring-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-bounce: cubic-bezier(0.68, -0.15, 0.27, 1.15);
+  --ease-premium: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ==========================================================================
+   Entry Animations
+   ========================================================================== */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.8s var(--spring-standard) both;
+}
+
+.fade-up-delay-1 { animation-delay: 0.1s; }
+.fade-up-delay-2 { animation-delay: 0.2s; }
+.fade-up-delay-3 { animation-delay: 0.3s; }
+.fade-up-delay-4 { animation-delay: 0.4s; }
+.fade-up-delay-5 { animation-delay: 0.5s; }
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-in {
+  animation: scale-in 0.6s var(--spring-standard) both;
+}
+
+/* ==========================================================================
+   Pulse Animation for XP / Active Elements
+   ========================================================================== */
+
+@keyframes xp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.xp-pulse {
+  animation: xp-pulse 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Shimmer / Loading Effect
+   ========================================================================== */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.62 0.18 149.2 / 8%) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Subtle Noise Grain Overlay
+   ========================================================================== */
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ==========================================================================
+   Scrollbar Styling — Apple-Inspired
+   ========================================================================== */
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -147,65 +433,29 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: oklch(1 0 0 / 25%);
 }
-
-/* Emerald glow effect for active elements */
-.emerald-glow {
-  box-shadow: 0 0 20px oklch(0.627 0.194 149.2 / 15%),
-    0 0 60px oklch(0.627 0.194 149.2 / 5%);
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(1 0 0 / 15%) transparent;
 }
 
-/* Pulse animation for XP */
-@keyframes xp-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-.xp-pulse {
-  animation: xp-pulse 2s ease-in-out infinite;
+/* ==========================================================================
+   Focus & Active States — Apple Tactile Feel
+   ========================================================================== */
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
 }
 
-/* PPC metric decorative shimmer */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    oklch(0.627 0.194 149.2 / 8%) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
-
-/* ponytail: premium ease curve */
-:root { --ease-premium: cubic-bezier(0.32, 0.72, 0, 1); }
-
-/* ponytail: card bezel utilities — outer shell */
-.card-bezel {
-  @apply p-[1px] rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02];
-}
-.card-bezel-dark {
-  @apply p-[1px] rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent;
-}
-.card-core {
-  @apply rounded-[calc(1rem-1px)] bg-card;
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
-/* ponytail: subtle noise grain overlay */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
+/* ==========================================================================
+   Button Icon Wrap (Magnetic)
+   ========================================================================== */
 
-/* ponytail: magnetic button icon wrap */
 .btn-icon-wrap {
   @apply w-7 h-7 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center shrink-0;
   transition: transform 0.4s var(--ease-premium);
@@ -217,14 +467,50 @@ button:active .btn-icon-wrap {
   transform: translate(2px, -1px) scale(0.98);
 }
 
-/* ponytail: entry animation utility */
-.fade-up {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s var(--ease-premium), transform 0.8s var(--ease-premium);
+/* ==========================================================================
+   Typography Refinements
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
 }
-.fade-up.in-view {
-  opacity: 1;
-  transform: translateY(0);
+
+p {
+  text-wrap: pretty;
 }
+
+/* ==========================================================================
+   Premium Separator
+   ========================================================================== */
+
+.separator-premium {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent
+  );
+}
+
+/* ==========================================================================
+   Interactive Ring — Spring Hover
+   ========================================================================== */
+
+.hover-ring {
+  position: relative;
+  transition: transform 0.4s var(--spring-standard);
+}
+.hover-ring::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  border: 2px solid transparent;
+  transition: border-color 0.4s var(--spring-standard);
+  pointer-events: none;
+}
+.hover-ring:hover::after {
+  border-color: oklch(0.62 0.18 149.2 / 30%);
 }

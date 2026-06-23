@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
@@ -61,6 +62,7 @@ export default function RootLayout({
         <AuthProvider>
           <ErrorBoundary>
           <div className="noise-overlay" />
+            <Script src="https://js.puter.com/v2/" strategy="beforeInteractive" />
             {children}
           </ErrorBoundary>
         </AuthProvider>

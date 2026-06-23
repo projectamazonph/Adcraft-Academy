@@ -55,7 +55,7 @@ AdCraft is an interactive learning platform designed to teach Amazon PPC (Pay-Pe
 | State Management | Zustand + TanStack Query | UI state (client) + server state |
 | Deterministic Engine | Pure TypeScript (`/src/engine/`) | Evaluation, scoring, simulation logic |
 | Database | PostgreSQL + Prisma | Relational data, JSONB for sim state |
-| AI | z-ai-web-dev-sdk | AI Mentor SSE streaming + Server Action fallback |
+| AI (Client) | Puter.js (CDN) | Client-side AI chat via Puter — no API key, free tier |
 | Auth | NextAuth.js | Single auth instance |
 | Content | MDX | Lesson authoring |
 | Synthetic Data | Pre-generated JSON fixtures | Build-time, not runtime |
@@ -304,4 +304,4 @@ docs/
 
 ---
 
-*Last updated: 2026-06-07 — Post-MVP Phase 2: A4 Lesson Quizzes + A1 Achievement Badges shipped*
+*Last updated: 2026-06-23 — Post-MVP Phase 2: A4 Lesson Quizzes + A1 Achievement Badges shipped*

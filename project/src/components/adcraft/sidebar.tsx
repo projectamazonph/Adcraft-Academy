@@ -88,7 +88,7 @@ export function Sidebar({
       {/* Sidebar — use explicit display classes to avoid tailwind-merge conflicts */}
       <motion.aside
         className={cn(
-          'fixed top-0 left-0 z-40 h-full border-r border-border bg-card/80 backdrop-blur-xl transition-all duration-300',
+          'fixed top-0 left-0 z-40 h-full border-r border-border glass-sidebar transition-all duration-300',
           // Desktop: always flex; Mobile: only flex when open
           'hidden lg:flex',
           mobileOpen && '!flex',

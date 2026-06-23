@@ -22,7 +22,7 @@
 | Charts | Recharts (Phase 3+) | Composable, responsive, SSR-friendly; adequate for PPC dashboards without D3 complexity |
 | Animations | Framer Motion | Layout animations for drag-drop; micro-interactions for feedback; performant GPU-accelerated transforms |
 | Rich Text/Content | MDX | Type-safe markdown for lessons; embed React components directly in lesson content |
-| AI Streaming | Vercel AI SDK | Native RSC streaming support; handles SSE/fallback gracefully; typed tool calls |
+| AI (Client) | Puter.js (CDN) | Client-side AI via Puter; no API key needed; streaming via async iterables |
 | Testing | Vitest + Playwright | Unit tests for formulas/logic; E2E for critical simulation flows |
 
 ---
@@ -338,7 +338,7 @@ app/
 | 3 | STRDataGrid (virtualized); TriageActionBar; TanStack Query setup; simulation state hydration | TanStack Table; Zustand |
 | 4 | CampaignBuilder (form-based for MVP); naming validator UI; portfolio grouping visualization | Zustand |
 | 5 | BidElevator; CPC calculator; projection charts; scenario card carousel | Framer Motion; touch gesture handling |
-| 6 | AIMentorChat (streaming + fallback); rule citation panel; latency monitoring UI | Vercel AI SDK; SSE |
+| 6 | AIMentorChat (streaming + fallback); rule citation panel; latency monitoring UI | Puter.js (CDN); Server API fallback |
 | 7 | Polish pass: animations, micro-interactions, accessibility audit, performance optimization, E2E test suite | Framer Motion; Playwright; Lighthouse |
 | 8 | Dashboard → real data, module progress tracking, MVP release candidate | All above |
 
@@ -346,4 +346,4 @@ app/
 
 *Source: Qwen chat "AdCraft Product Development Gaps" — 2026-06-03*
 *Architecture adapted for Monolith-First (ADR-001). React Flow campaign builder deferred to Phase 3+; MVP uses form-based builder.*
-*Last updated: 2026-06-04*
+*Last updated: 2026-06-23*

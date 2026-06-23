@@ -27,7 +27,7 @@ npx prisma db push --schema=prisma/schema.prisma
 ```
 
 ### 5. Seed Quiz Data
-Quiz questions are lazily seeded from `fixtures/quiz-questions.json` on first access — no manual step needed.
+Quiz questions are lazily seeded from `fixtures/quiz-questions.json` on first access --- no manual step needed.
 
 ---
 
@@ -41,11 +41,29 @@ Quiz questions are lazily seeded from `fixtures/quiz-questions.json` on first ac
 
 ---
 
+## AI Mentor (Puter.js)
+
+The AI Mentor runs **entirely client-side** via Puter.js CDN:
+
+- **No API key required** --- Puter handles auth via the user's browser
+- **Free tier** --- Users authenticate with their free Puter account
+- **Streaming** --- Token-by-token responses with full streaming UI
+- **Fallback** --- If Puter CDN is unavailable, falls back to server-side API
+
+The Puter.js script is loaded in `src/app/layout.tsx`:
+```html
+<script src="https://js.puter.com/v2/"></script>
+```
+
+No additional environment variables needed for AI features.
+
+---
+
 ## CI/CD (GitHub Actions)
 
 The `.github/workflows/ci.yml` runs:
 1. **On every PR**: Install, generate Prisma client, run 117 unit tests
-2. **On push to main**: Tests → auto-deploy to Vercel production
+2. **On push to main**: Tests -> auto-deploy to Vercel production
 
 ### Required GitHub Secrets
 ```
@@ -75,3 +93,7 @@ vercel ls
 # Rollback to previous
 vercel rollback
 ```
+
+---
+
+*Last updated: 2026-06-23 --- Added Puter.js AI Mentor (client-side, no API key)*

@@ -322,7 +322,7 @@ export default function Home() {
       {/* Main content */}
       <main className="flex-1 lg:pl-[240px] transition-all duration-300">
         {/* Top nav bar */}
-        <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-xl">
+        <header className="sticky top-0 z-30 border-b border-border bg-background/70 backdrop-blur-2xl border-b border-white/[0.06] dark:border-white/[0.06]">
           <div className="flex items-center justify-between px-4 lg:px-6 h-14">
             <div className="flex items-center gap-3 pl-12 lg:pl-0">
               <Zap className="h-4 w-4 text-primary lg:hidden" />
@@ -641,8 +641,9 @@ function SimulationsView({ onLaunchSim }: { onLaunchSim: (sim: string | null) =>
               whileHover={isUnlocked ? { y: -3 } : {}}
             >
               <Card
+                glass
                 className={cn(
-                  'relative overflow-hidden transition-colors h-full flex flex-col',
+                  'relative overflow-hidden transition-all h-full flex flex-col',
                   colors.border,
                   !isUnlocked && 'opacity-70'
                 )}
@@ -650,7 +651,7 @@ function SimulationsView({ onLaunchSim }: { onLaunchSim: (sim: string | null) =>
                 {/* Gradient background */}
                 <div
                   className={cn(
-                    'absolute inset-0 bg-gradient-to-br opacity-30',
+                    'absolute inset-0 bg-gradient-to-br opacity-20',
                     colors.gradient
                   )}
                 />

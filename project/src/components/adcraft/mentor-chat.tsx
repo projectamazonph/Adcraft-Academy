@@ -28,6 +28,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { usePuterChat } from '@/hooks/use-puter-chat';
 import { saveChatExchange, getChatHistory } from '@/app/actions/mentor';
 import { cn } from '@/lib/utils';
 
@@ -41,6 +42,52 @@ interface Message {
   model?: string;
   isStreaming?: boolean;
 }
+
+// --- PPC Mentor System Prompt (embedded client-side for Puter) ---
+const PPC_MENTOR_SYSTEM_PROMPT = `You are the PPC Mentor for AdCraft, an Amazon PPC training simulator.
+
+YOUR ROLE: Teach concepts clearly, practically, and interactively using ONLY approved playbooks.
+SOURCE OF TRUTH: Internal PPC Decision Matrix, Operations Playbook v7.6, Campaign Launch Prioritization Strategy. Always cite rule IDs when explaining decisions.
+
+RULES:
+1. NEVER make performance guarantees. Say "based on historical benchmarks" not "you will achieve."
+2. NEVER recommend unsafe tactics, review manipulation, trademark abuse, or policy evasion.
+3. When asked for action recommendations, ALWAYS ask for or infer: price, target ACoS, CVR, clicks, orders, spend, sales, lifecycle stage, inventory, category competitiveness.
+4. If data is insufficient, say "INSUFFICIENT DATA" and recommend what to monitor next. Do NOT guess.
+5. Keep responses under 150 words unless learner asks for deep dive.
+6. Use plain English first, then technical terms. Define acronyms on first use.
+7. Tone: Clear, practical, slightly playful. Not corporate oatmeal.
+
+RESPONSE FORMAT:
+- Direct answer (1 sentence)
+- Rule citation [Rule ID] (when applicable)
+- Example or analogy
+- Next step or practice question
+
+Use markdown formatting when helpful:
+- Bold for key terms and metric names
+- Bullet lists for step-by-step explanations
+- Backtick code for formulas and metric abbreviations like ACoS, CPC
+- Blockquotes for important rules or warnings
+- Headings for multi-part answers
+
+SAFETY: If user asks about black-hat tactics, respond: "I can't help with that. Here's a sustainable alternative aligned with Amazon policy: [safe option]."
+
+CONTEXT AWARENESS: You will receive context about the learner's current module, lesson, and simulation state. Use this to personalize your response. If they just completed a simulation, offer specific feedback on their decisions. If they're reading a lesson, reinforce the key concepts.
+
+PPC RULES REFERENCE (cite these by ID when explaining decisions):
+- [ACOS_THRESHOLD] ACoS < 15% = Excellent, 15-25% = Good, 25-40% = Moderate, > 40% = Needs optimization
+- [ACOS_BREAK_EVEN] Break-even ACoS = Profit Margin %. Target ACoS should be below break-even.
+- [TACOS_HEALTHY] TACoS < 5% = Healthy, 5-10% = Moderate, > 10% = Ad-dependent
+- [CPC_MAX] Max CPC = Product Price x Target ACoS x CVR. Never bid above this.
+- [ROAS_BENCHMARK] RoAS > 4x = Strong, 2-4x = Average, < 2x = Underperforming
+- [CTR_BENCHMARK] CTR > 0.5% for SP, > 0.3% for SB. Below threshold = relevancy issue.
+- [NEG_KEYWORD_RULE] Negate search terms with > 10 clicks and 0 orders. Use exact match first.
+- [BID_STRATEGY_START] New campaigns: Dynamic Bids Down Only. Switch to Up and Down after 2+ weeks of data.
+- [CAMPAIGN_STRUCTURE] Separate campaigns by match type (Exact, Phrase, Broad) for budget control.
+- [SPONSORED_PRODUCTS] Start with SP campaigns for direct ROI. Layer SB/SD for full-funnel.
+- [BUDGET_PACING] Daily budget should allow at least 10 clicks (Budget >= 10 x avg CPC).
+- [KEYWORD_HARVEST] Run Search Term Reports weekly. Promote high-converting terms to exact match.`;
 
 // --- Module-aware suggestions ---
 const moduleSuggestions: Record<number, string[]> = {
@@ -114,6 +161,12 @@ export function MentorChat({ moduleNumber, lessonSlug }: MentorChatProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
+  // Puter chat hook — used for CDN load status
+  const { isReady: puterReady } = usePuterChat({
+    systemPrompt: PPC_MENTOR_SYSTEM_PROMPT,
+    model: 'openai/gpt-4o-mini',
+  });
+
   // Build context string for the AI
   const buildContext = useCallback((): string => {
     const parts: string[] = [];
@@ -146,16 +199,22 @@ export function MentorChat({ moduleNumber, lessonSlug }: MentorChatProps) {
     if (sessionLoaded) return;
     getChatHistory().then((result) => {
       if (result.success && result.data.length > 0) {
-        const historyMessages: Message[] = result.data.map((m) => ({
-          id: `hist-${m.createdAt}`,
-          role: m.role as "user" | "assistant",
-          content: m.content,
-          timestamp: new Date(m.createdAt),
-        }));
-        setMessages(historyMessages);
+        const history = result.data.map((m: any, i: number) => {
+          const role = m.role === 'user' ? 'user' : 'assistant';
+          return {
+            id: `hist-${i}`,
+            role,
+            content: m.content || '',
+            timestamp: new Date(m.createdAt || Date.now()),
+            isStreaming: false,
+          } as Message;
+        });
+        if (history.length > 0) {
+          setMessages([...history]);
+        }
       }
-      setSessionLoaded(true);
-    }).catch(() => setSessionLoaded(true));
+    }).catch(() => {});
+    setSessionLoaded(true);
   }, [sessionLoaded]);
 
   // Get context-aware suggestions
@@ -163,7 +222,7 @@ export function MentorChat({ moduleNumber, lessonSlug }: MentorChatProps) {
     ? moduleSuggestions[moduleNumber] || defaultSuggestions
     : defaultSuggestions;
 
-  // --- Stream handler ---
+  // --- Stream handler — uses Puter.js directly (client-side, no API key) ---
   const handleSend = async (text?: string) => {
     const content = text || input.trim();
     if (!content || isStreaming) return;
@@ -205,101 +264,164 @@ export function MentorChat({ moduleNumber, lessonSlug }: MentorChatProps) {
 
       const context = buildContext();
       const startTime = Date.now();
-
-      // Fetch from streaming API route
-      const response = await fetch('/api/mentor/stream', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: content,
-          chatHistory,
-          context,
-        }),
-        signal: abortController.signal,
-      });
-
-      if (!response.ok) {
-        throw new Error(`Stream request failed: ${response.status}`);
-      }
-
-      // Read the SSE stream
-      const reader = response.body?.getReader();
-      if (!reader) throw new Error('No readable stream');
-
-      const decoder = new TextDecoder();
-      let sseBuffer = '';
       let accumulatedContent = '';
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+      if (puterReady && window.puter?.chat) {
+        // === PUTER.JS PATH (client-side, no API key) ===
+        const systemPrompt = context
+          ? `${PPC_MENTOR_SYSTEM_PROMPT}\n\nLEARNER CONTEXT:\n${context}`
+          : PPC_MENTOR_SYSTEM_PROMPT;
 
-        sseBuffer += decoder.decode(value, { stream: true });
+        const messagesToSend: PuterChatMessage[] = [
+          { role: 'system', content: systemPrompt },
+        ];
 
-        // Process complete SSE lines
-        const lines = sseBuffer.split('\n');
-        sseBuffer = lines.pop() || ''; // Keep incomplete line
+        for (const msg of chatHistory) {
+          messagesToSend.push({ role: msg.role, content: msg.content });
+        }
+        messagesToSend.push({ role: 'user', content });
 
-        for (const line of lines) {
-          const trimmed = line.trim();
-          if (!trimmed || trimmed.startsWith(':')) continue;
+        const response = await window.puter.chat(messagesToSend, {
+          stream: true,
+          model: 'openai/gpt-4o-mini',
+        });
 
-          if (trimmed.startsWith('data: ')) {
-            const data = trimmed.slice(6);
+        if (response && Symbol.asyncIterator in Object(response)) {
+          for await (const part of response as AsyncIterable<PuterChatStreamPart>) {
+            if (abortController.signal.aborted) break;
 
-            try {
-              const parsed = JSON.parse(data);
+            const token = part.text || part.message?.content || '';
+            if (token) {
+              accumulatedContent += token;
+              setMessages((prev) =>
+                prev.map((m) =>
+                  m.id === aiMessageId
+                    ? { ...m, content: accumulatedContent }
+                    : m
+                )
+              );
+            }
+          }
+        } else {
+          // Non-streaming fallback
+          const result = response as PuterChatResponse;
+          accumulatedContent = result.message?.content || result.text || '';
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === aiMessageId
+                ? { ...m, content: accumulatedContent }
+                : m
+            )
+          );
+        }
 
-              if (parsed.type === 'token' && parsed.content) {
-                accumulatedContent += parsed.content;
+        const latencyMs = Date.now() - startTime;
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === aiMessageId
+              ? {
+                  ...m,
+                  content: accumulatedContent,
+                  isStreaming: false,
+                  latencyMs,
+                  model: 'puter/gpt-4o-mini',
+                }
+              : m
+          )
+        );
 
-                // Update the AI message with accumulated content
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === aiMessageId
-                      ? { ...m, content: accumulatedContent }
-                      : m
-                  )
-                );
-              } else if (parsed.type === 'done') {
-                const latencyMs = Date.now() - startTime;
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === aiMessageId
-                      ? {
-                          ...m,
-                          content: accumulatedContent,
-                          isStreaming: false,
-                          latencyMs,
-                          model: parsed.model || 'streamed',
-                        }
-                      : m
-                  )
-                );
-                // ponytail: persist to DB
-                saveChatExchange(content, accumulatedContent).catch(() => {});
-              } else if (parsed.type === 'error') {
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === aiMessageId
-                      ? {
-                          ...m,
-                          content: accumulatedContent || 'Stream was interrupted. Please try again.',
-                          role: 'error' as const,
-                          isStreaming: false,
-                        }
-                      : m
-                  )
-                );
+        // Try to persist to DB (non-blocking)
+        saveChatExchange(content, accumulatedContent).catch(() => {});
+      } else {
+        // === SERVER API FALLBACK PATH ===
+        const response = await fetch('/api/mentor/stream', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: content,
+            chatHistory,
+            context,
+          }),
+          signal: abortController.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Stream request failed: ${response.status}`);
+        }
+
+        const reader = response.body?.getReader();
+        if (!reader) throw new Error('No readable stream');
+
+        const decoder = new TextDecoder();
+        let sseBuffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          sseBuffer += decoder.decode(value, { stream: true });
+
+          const lines = sseBuffer.split('\n');
+          sseBuffer = lines.pop() || '';
+
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed || trimmed.startsWith(':')) continue;
+
+            if (trimmed.startsWith('data: ')) {
+              const data = trimmed.slice(6);
+
+              try {
+                const parsed = JSON.parse(data);
+
+                if (parsed.type === 'token' && parsed.content) {
+                  accumulatedContent += parsed.content;
+                  setMessages((prev) =>
+                    prev.map((m) =>
+                      m.id === aiMessageId
+                        ? { ...m, content: accumulatedContent }
+                        : m
+                    )
+                  );
+                } else if (parsed.type === 'done') {
+                  const latencyMs = Date.now() - startTime;
+                  setMessages((prev) =>
+                    prev.map((m) =>
+                      m.id === aiMessageId
+                        ? {
+                            ...m,
+                            content: accumulatedContent,
+                            isStreaming: false,
+                            latencyMs,
+                            model: parsed.model || 'streamed',
+                          }
+                        : m
+                    )
+                  );
+                  saveChatExchange(content, accumulatedContent).catch(() => {});
+                } else if (parsed.type === 'error') {
+                  setMessages((prev) =>
+                    prev.map((m) =>
+                      m.id === aiMessageId
+                        ? {
+                            ...m,
+                            content: accumulatedContent || 'Stream was interrupted. Please try again.',
+                            role: 'error' as const,
+                            isStreaming: false,
+                          }
+                        : m
+                    )
+                  );
+                }
+              } catch {
+                // Skip unparseable lines
               }
-            } catch {
-              // Skip unparseable lines
             }
           }
         }
       }
 
-      // If stream ended without 'done' event, finalize anyway
+      // If stream ended without finalize, finalize anyway
       setMessages((prev) =>
         prev.map((m) =>
           m.id === aiMessageId && m.isStreaming
@@ -312,7 +434,9 @@ export function MentorChat({ moduleNumber, lessonSlug }: MentorChatProps) {
             : m
         )
       );
-                saveChatExchange(content, accumulatedContent).catch(() => {});
+      if (!puterReady) {
+        saveChatExchange(content, accumulatedContent).catch(() => {});
+      }
     } catch (error: any) {
       // Handle abort gracefully
       if (error?.name === 'AbortError') {
@@ -358,186 +482,144 @@ export function MentorChat({ moduleNumber, lessonSlug }: MentorChatProps) {
     }
   };
 
-  const handleClear = () => {
-    // Cancel any in-flight stream
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-    const systemMsg: Message = {
-      id: `system-${Date.now()}`,
-      role: 'system',
-      content: 'Conversation cleared. Start fresh!',
-      timestamp: new Date(),
-    };
-    setMessages([welcomeMessage, systemMsg]);
-    setIsStreaming(false);
-  };
-
-  const handleCopy = async (messageId: string, content: string) => {
+  const handleCopy = async (id: string, content: string) => {
     try {
       await navigator.clipboard.writeText(content);
-      setCopiedId(messageId);
+      setCopiedId(id);
       setTimeout(() => setCopiedId(null), 2000);
     } catch {
-      // Fallback: select text
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea');
+      textarea.value = content;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
     }
   };
 
-  const messageCount = messages.filter((m) => m.role === 'user' || m.role === 'assistant').length;
-  const lastModel = [...messages].reverse().find((m) => m.model)?.model;
+  const handleClearChat = () => {
+    if (isStreaming) {
+      abortControllerRef.current?.abort();
+    }
+    setMessages([welcomeMessage]);
+  };
 
   return (
-    <div className="flex flex-col h-full min-h-[500px]">
+    <div className="flex flex-col h-full glass-panel rounded-none border-0">
       {/* Header */}
-      <div className="flex items-center gap-3 pb-4 border-b border-border">
-        <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-          <Bot className="h-5 w-5 text-primary" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-semibold">AI Mentor</h2>
-            {lastModel && (
-              <Badge variant="outline" className="text-[9px] gap-1 bg-violet-500/10 text-violet-400 border-violet-500/20">
-                <Cpu className="h-2.5 w-2.5" />
-                AI-Powered
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border shrink-0">
+        <div className="flex items-center gap-3">
+          <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20">
+            <Bot className="h-4 w-4 text-primary" />
+          </div>
+          <div>
+            <h2 className="text-sm font-semibold flex items-center gap-2">
+              AI Mentor
+              <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4 font-normal">
+                <Cpu className="h-2.5 w-2.5 mr-1" />
+                {puterReady ? 'Puter AI' : 'Server AI'}
               </Badge>
-            )}
+            </h2>
+            <p className="text-[10px] text-muted-foreground/60">
+              {puterReady
+                ? 'Client-side AI — no API key needed'
+                : 'Connecting to Puter...'}
+            </p>
           </div>
-          <p className="text-xs text-muted-foreground">
-            Your PPC coaching assistant — powered by AI
-          </p>
         </div>
-
-        <div className="flex items-center gap-2">
-          {/* Status indicator */}
-          <div className="flex items-center gap-1.5">
-            <span className={cn(
-              'h-2 w-2 rounded-full',
-              isStreaming ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'
-            )} />
-            <span className={cn(
-              'text-xs font-medium',
-              isStreaming ? 'text-amber-400' : 'text-emerald-400'
-            )}>
-              {isStreaming ? 'Streaming...' : 'Online'}
-            </span>
-          </div>
-
-          <Separator orientation="vertical" className="h-5" />
-
-          {/* Message count */}
+        <div className="flex items-center gap-1">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <MessageSquare className="h-3 w-3" />
-                  {messageCount}
-                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7 text-muted-foreground hover:text-foreground"
+                  onClick={handleClearChat}
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </Button>
               </TooltipTrigger>
-              <TooltipContent>
-                <p>{messageCount} messages in conversation</p>
+              <TooltipContent side="bottom">
+                <p className="text-xs">Clear chat</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-
-          {/* Cancel / Clear button */}
-          {isStreaming ? (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-7 w-7 text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                    onClick={handleCancel}
-                  >
-                    <StopCircle className="h-3.5 w-3.5" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Stop generating</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          ) : (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-7 w-7"
-                    onClick={handleClear}
-                    disabled={messages.length <= 1}
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Clear conversation</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          )}
         </div>
       </div>
 
-      {/* Context banner */}
-      {moduleNumber !== undefined && (
-        <div className="flex items-center gap-2 py-2 px-1 text-xs text-muted-foreground">
-          <Sparkles className="h-3 w-3 text-primary" />
-          <span>Context: Module {moduleNumber} — {lessonSlug || 'General'}</span>
-        </div>
-      )}
+      {/* Messages area */}
+      <ScrollArea className="flex-1 px-4 py-4" viewportRef={viewportRef}>
+        <div className="space-y-4 max-w-3xl mx-auto">
+          <AnimatePresence mode="popLayout">
+            {messages.map((msg) => (
+              <MessageBubble
+                key={msg.id}
+                message={msg}
+                copiedId={copiedId}
+                onCopy={handleCopy}
+              />
+            ))}
+          </AnimatePresence>
 
-      {/* Messages */}
-      <ScrollArea className="flex-1 py-4">
-        <div className="space-y-4 pr-4">
-          {messages.map((message) => (
-            <MessageBubble
-              key={message.id}
-              message={message}
-              copiedId={copiedId}
-              onCopy={handleCopy}
-            />
-          ))}
+          {!puterReady && !isStreaming && (
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center justify-center gap-2 py-2"
+            >
+              <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground/50 bg-muted/30 px-3 py-1.5 rounded-full">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary/60" />
+                </span>
+                Loading Puter AI...
+              </div>
+            </motion.div>
+          )}
 
-          {/* Scroll anchor */}
           <div ref={messagesEndRef} />
         </div>
       </ScrollArea>
 
-      {/* Suggested questions */}
+      {/* Suggestions */}
       {messages.length <= 1 && !isStreaming && (
-        <div className="py-3 border-t border-border">
-          <p className="text-xs text-muted-foreground mb-2">
-            {moduleNumber !== undefined ? 'Suggested for your current module:' : 'Try asking:'}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((q) => (
-              <Button
-                key={q}
-                variant="outline"
-                size="sm"
-                className="text-xs h-7 gap-1.5 border-primary/20 hover:bg-primary/5 hover:border-primary/30"
-                onClick={() => handleSend(q)}
-                disabled={isStreaming}
-              >
-                <Sparkles className="h-3 w-3 text-primary" />
-                {q}
-              </Button>
-            ))}
+        <div className="px-4 pb-3">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex flex-wrap gap-1.5">
+              {suggestions.map((q, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSend(q)}
+                  className="text-[11px] px-2.5 py-1 rounded-full bg-muted/40 border border-border/50 text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
 
-      {/* Input */}
-      <div className="pt-3 border-t border-border">
-        <div className="flex items-center gap-2">
-          <div className="flex-1 relative">
+      {/* Input bar */}
+      <div className="border-t border-border shrink-0">
+        <div className="flex items-center gap-2 p-3 max-w-3xl mx-auto">
+          <div className="relative flex-1">
             <input
-              type="text"
-              placeholder="Ask your PPC mentor anything..."
+              ref={(el) => {
+                if (el) {
+                  el.style.height = 'auto';
+                  el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
+                }
+              }}
+              placeholder={
+                puterReady
+                  ? 'Ask the AI Mentor about PPC...'
+                  : 'Loading Puter AI...'
+              }
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}

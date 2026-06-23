@@ -171,3 +171,14 @@ Stage Summary:
 - Auto-award integration across all key user actions
 - Documentation at docs/atomic-builds/A1-achievement-badges.md
 - All project-level docs updated (README, project-plan, post-mvp-build-list)
+
+## 2026-06-23
+
+- Integrated Puter.js CDN for client-side AI Mentor (no API key needed)
+- Added Puter.js chat hook with streaming support (usePuterChat)
+- Replaced server-side ZAI SDK with client-side Puter.chat() in mentor-chat.tsx
+- Apple-style design refresh: liquid-glass panels, off-black dark mode, spring motion
+- Refined shadcn/ui components: Card (glass variant), Button (active states), Badge (pill shape)
+- Added glass-sidebar, glass-panel, shadow-apple-* utility classes
+- Cleaned up temp files, updated .gitignore
+- Updated docs: README, deployment guide, frontend spec

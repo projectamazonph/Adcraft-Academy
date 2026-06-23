@@ -1,8 +1,26 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
+// --- Types ---
+interface CardProps extends React.ComponentProps<"div"> {
+  /** Use Apple liquid-glass style */
+  glass?: boolean;
+}
+
 // ponytail: Double-Bezel card — outer shell + inner core
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+function Card({ className, glass, ...props }: CardProps) {
+  if (glass) {
+    return (
+      <div
+        data-slot="card"
+        className={cn(
+          "card-glass text-card-foreground flex flex-col gap-6 py-6",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
   return (
     <div className={cn("card-bezel-dark", className)}>
       <div
