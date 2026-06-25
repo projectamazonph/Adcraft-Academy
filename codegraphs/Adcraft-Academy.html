@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Adcraft-Academy - Code Dependency Graph</title>
+<style>
+  body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 20px; background: #fafafa; }
+  h1 { color: #333; }
+  #graph { width: 100%; height: 80vh; border: 1px solid #ddd; background: white; }
+  .legend { margin: 10px 0; }
+  .legend-item { display: inline-block; margin-right: 15px; }
+  .legend-color { display: inline-block; width: 12px; height: 12px; margin-right: 4px; border-radius: 2px; }
+  .info { color: #666; font-size: 14px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<h1>Adcraft-Academy — Interactive Dependency Graph</h1>
+<div class="info">Nodes: 108 files | Edges: 40 import relationships | Drag nodes to rearrange, scroll to zoom</div>
+<div class="legend">
+  <div class="legend-item"><span class="legend-color" style="background:#9b59b6"></span>e2e</div>
+  <div class="legend-item"><span class="legend-color" style="background:#3498db"></span>examples</div>
+  <div class="legend-item"><span class="legend-color" style="background:#e74c3c"></span>root</div>
+  <div class="legend-item"><span class="legend-color" style="background:#2ecc71"></span>scripts</div>
+  <div class="legend-item"><span class="legend-color" style="background:#f39c12"></span>src</div>
+
+</div>
+<div id="graph"></div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const nodes = [{"id": "next.config", "group": "root", "file": "next.config"}, {"id": "playwright.config", "group": "root", "file": "playwright.config"}, {"id": "tailwind.config", "group": "root", "file": "tailwind.config"}, {"id": "vitest.config", "group": "root", "file": "vitest.config"}, {"id": "e2e/smoke.spec", "group": "e2e", "file": "smoke.spec"}, {"id": "examples/websocket/frontend", "group": "examples", "file": "frontend"}, {"id": "examples/websocket/server", "group": "examples", "file": "server"}, {"id": "scripts/puter-api", "group": "scripts", "file": "puter-api"}, {"id": "src/instrumentation", "group": "src", "file": "instrumentation"}, {"id": "src/middleware", "group": "src", "file": "middleware"}, {"id": "src/app/layout", "group": "src", "file": "layout"}, {"id": "src/app/page", "group": "src", "file": "page"}, {"id": "src/app/actions/admin", "group": "src", "file": "admin"}, {"id": "src/app/actions/analytics", "group": "src", "file": "analytics"}, {"id": "src/app/actions/badge", "group": "src", "file": "badge"}, {"id": "src/app/actions/certificate-lifecycle", "group": "src", "file": "certificate-lifecycle"}, {"id": "src/app/actions/certificate", "group": "src", "file": "certificate"}, {"id": "src/app/actions/cheatsheet", "group": "src", "file": "cheatsheet"}, {"id": "src/app/actions/events", "group": "src", "file": "events"}, {"id": "src/app/actions/leaderboard", "group": "src", "file": "leaderboard"}, {"id": "src/app/actions/lesson", "group": "src", "file": "lesson"}, {"id": "src/app/actions/mentor", "group": "src", "file": "mentor"}, {"id": "src/app/actions/mistake-analysis", "group": "src", "file": "mistake-analysis"}, {"id": "src/app/actions/progress", "group": "src", "file": "progress"}, {"id": "src/app/actions/quiz", "group": "src", "file": "quiz"}, {"id": "src/app/actions/simulation", "group": "src", "file": "simulation"}, {"id": "src/app/actions/team", "group": "src", "file": "team"}, {"id": "src/app/actions/types", "group": "src", "file": "types"}, {"id": "src/app/api/route", "group": "src", "file": "route"}, {"id": "src/app/api/auth/[...nextauth]/route", "group": "src", "file": "route"}, {"id": "src/app/api/auth/signup/route", "group": "src", "file": "route"}, {"id": "src/app/api/health/route", "group": "src", "file": "route"}, {"id": "src/app/api/mentor/stream/route", "group": "src", "file": "route"}, {"id": "src/app/auth/signin/page", "group": "src", "file": "page"}, {"id": "src/app/auth/signup/page", "group": "src", "file": "page"}, {"id": "src/app/verify/[hash]/page", "group": "src", "file": "page"}, {"id": "src/components/adcraft/admin-analytics", "group": "src", "file": "admin-analytics"}, {"id": "src/components/adcraft/analytics-dashboard", "group": "src", "file": "analytics-dashboard"}, {"id": "src/components/adcraft/badge-showcase", "group": "src", "file": "badge-showcase"}, {"id": "src/components/adcraft/bid-arena", "group": "src", "file": "bid-arena"}, {"id": "src/components/adcraft/bid-briefing", "group": "src", "file": "bid-briefing"}, {"id": "src/components/adcraft/bid-elevator", "group": "src", "file": "bid-elevator"}, {"id": "src/components/adcraft/bid-review", "group": "src", "file": "bid-review"}, {"id": "src/components/adcraft/bid-scoring", "group": "src", "file": "bid-scoring"}, {"id": "src/components/adcraft/campaign-briefing", "group": "src", "file": "campaign-briefing"}, {"id": "src/components/adcraft/campaign-builder", "group": "src", "file": "campaign-builder"}, {"id": "src/components/adcraft/campaign-review", "group": "src", "file": "campaign-review"}, {"id": "src/components/adcraft/campaign-scoring", "group": "src", "file": "campaign-scoring"}, {"id": "src/components/adcraft/campaign-workshop", "group": "src", "file": "campaign-workshop"}, {"id": "src/components/adcraft/certificate-manager", "group": "src", "file": "certificate-manager"}, {"id": "src/components/adcraft/certificate", "group": "src", "file": "certificate"}, {"id": "src/components/adcraft/dashboard", "group": "src", "file": "dashboard"}, {"id": "src/components/adcraft/error-boundary", "group": "src", "file": "error-boundary"}, {"id": "src/components/adcraft/formula-calculator", "group": "src", "file": "formula-calculator"}, {"id": "src/components/adcraft/leaderboard", "group": "src", "file": "leaderboard"}, {"id": "src/components/adcraft/lesson-player", "group": "src", "file": "lesson-player"}, {"id": "src/components/adcraft/mentor-chat", "group": "src", "file": "mentor-chat"}, {"id": "src/components/adcraft/mistake-replay", "group": "src", "file": "mistake-replay"}, {"id": "src/components/adcraft/module-cards", "group": "src", "file": "module-cards"}, {"id": "src/components/adcraft/quiz-player", "group": "src", "file": "quiz-player"}, {"id": "src/components/adcraft/sidebar", "group": "src", "file": "sidebar"}, {"id": "src/components/adcraft/simulation-cards", "group": "src", "file": "simulation-cards"}, {"id": "src/components/adcraft/stats-row", "group": "src", "file": "stats-row"}, {"id": "src/components/adcraft/str-briefing", "group": "src", "file": "str-briefing"}, {"id": "src/components/adcraft/str-data-grid", "group": "src", "file": "str-data-grid"}, {"id": "src/components/adcraft/str-review", "group": "src", "file": "str-review"}, {"id": "src/components/adcraft/str-scoring", "group": "src", "file": "str-scoring"}, {"id": "src/components/adcraft/str-triage-arena", "group": "src", "file": "str-triage-arena"}, {"id": "src/components/adcraft/team-dashboard", "group": "src", "file": "team-dashboard"}, {"id": "src/components/adcraft/xp-progress", "group": "src", "file": "xp-progress"}, {"id": "src/components/providers/session-provider", "group": "src", "file": "session-provider"}, {"id": "src/components/ui/avatar", "group": "src", "file": "avatar"}, {"id": "src/components/ui/badge", "group": "src", "file": "badge"}, {"id": "src/components/ui/button", "group": "src", "file": "button"}, {"id": "src/components/ui/card", "group": "src", "file": "card"}, {"id": "src/components/ui/input", "group": "src", "file": "input"}, {"id": "src/components/ui/label", "group": "src", "file": "label"}, {"id": "src/components/ui/progress", "group": "src", "file": "progress"}, {"id": "src/components/ui/scroll-area", "group": "src", "file": "scroll-area"}, {"id": "src/components/ui/select", "group": "src", "file": "select"}, {"id": "src/components/ui/separator", "group": "src", "file": "separator"}, {"id": "src/components/ui/slider", "group": "src", "file": "slider"}, {"id": "src/components/ui/tabs", "group": "src", "file": "tabs"}, {"id": "src/components/ui/toast", "group": "src", "file": "toast"}, {"id": "src/components/ui/toaster", "group": "src", "file": "toaster"}, {"id": "src/components/ui/tooltip", "group": "src", "file": "tooltip"}, {"id": "src/engine/evaluation.test", "group": "src", "file": "evaluation.test"}, {"id": "src/engine/evaluation", "group": "src", "file": "evaluation"}, {"id": "src/engine/formulas.test", "group": "src", "file": "formulas.test"}, {"id": "src/engine/formulas", "group": "src", "file": "formulas"}, {"id": "src/engine/index", "group": "src", "file": "index"}, {"id": "src/engine/mistake-analysis.test", "group": "src", "file": "mistake-analysis.test"}, {"id": "src/engine/mistake-analysis", "group": "src", "file": "mistake-analysis"}, {"id": "src/engine/simulation", "group": "src", "file": "simulation"}, {"id": "src/engine/types", "group": "src", "file": "types"}, {"id": "src/hooks/use-puter-chat", "group": "src", "file": "use-puter-chat"}, {"id": "src/hooks/use-toast", "group": "src", "file": "use-toast"}, {"id": "src/lib/auth-guard", "group": "src", "file": "auth-guard"}, {"id": "src/lib/auth", "group": "src", "file": "auth"}, {"id": "src/lib/db", "group": "src", "file": "db"}, {"id": "src/lib/env", "group": "src", "file": "env"}, {"id": "src/lib/logger", "group": "src", "file": "logger"}, {"id": "src/lib/puter.d", "group": "src", "file": "puter.d"}, {"id": "src/lib/rate-limit", "group": "src", "file": "rate-limit"}, {"id": "src/lib/utils", "group": "src", "file": "utils"}, {"id": "src/stores/bid-elevator-store", "group": "src", "file": "bid-elevator-store"}, {"id": "src/stores/campaign-builder-store", "group": "src", "file": "campaign-builder-store"}, {"id": "src/stores/str-triage-store", "group": "src", "file": "str-triage-store"}];
+const links = [{"source": "src/app/layout", "target": "src/app/globals"}, {"source": "src/app/actions/admin", "target": "src/app/actions/types"}, {"source": "src/app/actions/analytics", "target": "src/app/actions/types"}, {"source": "src/app/actions/certificate-lifecycle", "target": "src/app/actions/events"}, {"source": "src/app/actions/certificate-lifecycle", "target": "src/app/actions/types"}, {"source": "src/app/actions/certificate", "target": "src/app/actions/types"}, {"source": "src/app/actions/cheatsheet", "target": "src/app/actions/types"}, {"source": "src/app/actions/events", "target": "src/app/actions/types"}, {"source": "src/app/actions/leaderboard", "target": "src/app/actions/types"}, {"source": "src/app/actions/lesson", "target": "src/app/actions/types"}, {"source": "src/app/actions/mentor", "target": "src/app/actions/events"}, {"source": "src/app/actions/mistake-analysis", "target": "src/app/actions/events"}, {"source": "src/app/actions/mistake-analysis", "target": "src/app/actions/types"}, {"source": "src/app/actions/progress", "target": "src/app/actions/events"}, {"source": "src/app/actions/quiz", "target": "src/app/actions/badge"}, {"source": "src/app/actions/quiz", "target": "src/app/actions/events"}, {"source": "src/app/actions/simulation", "target": "src/app/actions/events"}, {"source": "src/app/actions/team", "target": "src/app/actions/events"}, {"source": "src/app/actions/team", "target": "src/app/actions/types"}, {"source": "src/components/adcraft/bid-elevator", "target": "src/components/adcraft/bid-briefing"}, {"source": "src/components/adcraft/bid-elevator", "target": "src/components/adcraft/bid-arena"}, {"source": "src/components/adcraft/bid-elevator", "target": "src/components/adcraft/bid-scoring"}, {"source": "src/components/adcraft/bid-elevator", "target": "src/components/adcraft/bid-review"}, {"source": "src/components/adcraft/campaign-builder", "target": "src/components/adcraft/campaign-briefing"}, {"source": "src/components/adcraft/campaign-builder", "target": "src/components/adcraft/campaign-workshop"}, {"source": "src/components/adcraft/campaign-builder", "target": "src/components/adcraft/campaign-scoring"}, {"source": "src/components/adcraft/campaign-builder", "target": "src/components/adcraft/campaign-review"}, {"source": "src/components/adcraft/dashboard", "target": "src/components/adcraft/xp-progress"}, {"source": "src/components/adcraft/dashboard", "target": "src/components/adcraft/stats-row"}, {"source": "src/components/adcraft/dashboard", "target": "src/components/adcraft/module-cards"}, {"source": "src/components/adcraft/dashboard", "target": "src/components/adcraft/simulation-cards"}, {"source": "src/components/adcraft/dashboard", "target": "src/components/adcraft/sidebar"}, {"source": "src/components/adcraft/str-triage-arena", "target": "src/components/adcraft/str-briefing"}, {"source": "src/components/adcraft/str-triage-arena", "target": "src/components/adcraft/str-data-grid"}, {"source": "src/components/adcraft/str-triage-arena", "target": "src/components/adcraft/str-scoring"}, {"source": "src/components/adcraft/str-triage-arena", "target": "src/components/adcraft/str-review"}, {"source": "src/engine/evaluation", "target": "src/engine/formulas"}, {"source": "src/stores/bid-elevator-store", "target": "fixtures/bid-elevator-pack-1"}, {"source": "src/stores/campaign-builder-store", "target": "fixtures/campaign-builder-pack-1"}, {"source": "src/stores/str-triage-store", "target": "fixtures/str-triage-pack-1"}];
+const groupColors = {"root": "#e74c3c", "examples": "#3498db", "scripts": "#2ecc71", "src": "#f39c12", "e2e": "#9b59b6"};
+
+const svg = d3.select("#graph").append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .call(d3.zoom().on("zoom", (event) => container.attr("transform", event.transform)));
+
+const container = svg.append("g");
+
+const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(80))
+    .force("charge", d3.forceManyBody().strength(-200))
+    .force("center", d3.forceCenter(svg.node().clientWidth / 2, svg.node().clientHeight / 2))
+    .force("collision", d3.forceCollide().radius(20));
+
+const link = container.append("g")
+    .selectAll("line")
+    .data(links)
+    .join("line")
+    .attr("stroke", "#999")
+    .attr("stroke-opacity", 0.6)
+    .attr("stroke-width", 1);
+
+const node = container.append("g")
+    .selectAll("g")
+    .data(nodes)
+    .join("g")
+    .call(d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended));
+
+node.append("circle")
+    .attr("r", 6)
+    .attr("fill", d => groupColors[d.group] || '#999')
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 1.5);
+
+node.append("text")
+    .text(d => d.file)
+    .attr("x", 8)
+    .attr("y", 3)
+    .attr("font-size", "10px")
+    .attr("fill", "#333");
+
+node.append("title").text(d => d.id);
+
+simulation.on("tick", () => {{
+    link.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+    node.attr("transform", d => `translate(${{d.x}},${{d.y}})`);
+}});
+
+function dragstarted(event, d) {{
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x; d.fy = d.y;
+}}
+function dragged(event, d) {{ d.fx = event.x; d.fy = event.y; }}
+function dragended(event, d) {{
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null; d.fy = null;
+}}
+</script>
+</body>
+</html>

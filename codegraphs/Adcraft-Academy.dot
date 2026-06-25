@@ -1,0 +1,279 @@
+digraph Adcraft-Academy {
+  rankdir=TB;
+  node [shape=box, style=filled, fillcolor="#f0f0f0", fontname="Helvetica"];
+  edge [color="#666666"];
+
+  subgraph cluster_ {
+    label="";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "next.config" [label="next.config"];
+    "playwright.config" [label="playwright.config"];
+    "tailwind.config" [label="tailwind.config"];
+    "vitest.config" [label="vitest.config"];
+  }
+
+  subgraph cluster_e2e {
+    label="e2e";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "e2e/smoke.spec" [label="smoke.spec"];
+  }
+
+  subgraph cluster_examples_websocket {
+    label="examples/websocket";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "examples/websocket/frontend" [label="frontend"];
+    "examples/websocket/server" [label="server"];
+  }
+
+  subgraph cluster_scripts {
+    label="scripts";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "scripts/puter-api" [label="puter-api"];
+  }
+
+  subgraph cluster_src {
+    label="src";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/instrumentation" [label="instrumentation"];
+    "src/middleware" [label="middleware"];
+  }
+
+  subgraph cluster_src_app {
+    label="src/app";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/layout" [label="layout"];
+    "src/app/page" [label="page"];
+  }
+
+  subgraph cluster_src_app_actions {
+    label="src/app/actions";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/actions/admin" [label="admin"];
+    "src/app/actions/analytics" [label="analytics"];
+    "src/app/actions/badge" [label="badge"];
+    "src/app/actions/certificate-lifecycle" [label="certificate-lifecycle"];
+    "src/app/actions/certificate" [label="certificate"];
+    "src/app/actions/cheatsheet" [label="cheatsheet"];
+    "src/app/actions/events" [label="events"];
+    "src/app/actions/leaderboard" [label="leaderboard"];
+    "src/app/actions/lesson" [label="lesson"];
+    "src/app/actions/mentor" [label="mentor"];
+    "src/app/actions/mistake-analysis" [label="mistake-analysis"];
+    "src/app/actions/progress" [label="progress"];
+    "src/app/actions/quiz" [label="quiz"];
+    "src/app/actions/simulation" [label="simulation"];
+    "src/app/actions/team" [label="team"];
+    "src/app/actions/types" [label="types"];
+  }
+
+  subgraph cluster_src_app_api {
+    label="src/app/api";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/api/route" [label="route"];
+  }
+
+  subgraph cluster_src_app_api_auth_signup {
+    label="src/app/api/auth/signup";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/api/auth/signup/route" [label="route"];
+  }
+
+  subgraph cluster_src_app_api_health {
+    label="src/app/api/health";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/api/health/route" [label="route"];
+  }
+
+  subgraph cluster_src_app_api_mentor_stream {
+    label="src/app/api/mentor/stream";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/api/mentor/stream/route" [label="route"];
+  }
+
+  subgraph cluster_src_app_auth_signin {
+    label="src/app/auth/signin";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/auth/signin/page" [label="page"];
+  }
+
+  subgraph cluster_src_app_auth_signup {
+    label="src/app/auth/signup";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/auth/signup/page" [label="page"];
+  }
+
+  subgraph cluster_src_app_verify_[hash] {
+    label="src/app/verify/[hash]";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/app/verify/[hash]/page" [label="page"];
+  }
+
+  subgraph cluster_src_components_adcraft {
+    label="src/components/adcraft";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/components/adcraft/admin-analytics" [label="admin-analytics"];
+    "src/components/adcraft/analytics-dashboard" [label="analytics-dashboard"];
+    "src/components/adcraft/badge-showcase" [label="badge-showcase"];
+    "src/components/adcraft/bid-arena" [label="bid-arena"];
+    "src/components/adcraft/bid-briefing" [label="bid-briefing"];
+    "src/components/adcraft/bid-elevator" [label="bid-elevator"];
+    "src/components/adcraft/bid-review" [label="bid-review"];
+    "src/components/adcraft/bid-scoring" [label="bid-scoring"];
+    "src/components/adcraft/campaign-briefing" [label="campaign-briefing"];
+    "src/components/adcraft/campaign-builder" [label="campaign-builder"];
+    "src/components/adcraft/campaign-review" [label="campaign-review"];
+    "src/components/adcraft/campaign-scoring" [label="campaign-scoring"];
+    "src/components/adcraft/campaign-workshop" [label="campaign-workshop"];
+    "src/components/adcraft/certificate-manager" [label="certificate-manager"];
+    "src/components/adcraft/certificate" [label="certificate"];
+    "src/components/adcraft/dashboard" [label="dashboard"];
+    "src/components/adcraft/error-boundary" [label="error-boundary"];
+    "src/components/adcraft/formula-calculator" [label="formula-calculator"];
+    "src/components/adcraft/leaderboard" [label="leaderboard"];
+    "src/components/adcraft/lesson-player" [label="lesson-player"];
+    "src/components/adcraft/mentor-chat" [label="mentor-chat"];
+    "src/components/adcraft/mistake-replay" [label="mistake-replay"];
+    "src/components/adcraft/module-cards" [label="module-cards"];
+    "src/components/adcraft/quiz-player" [label="quiz-player"];
+    "src/components/adcraft/sidebar" [label="sidebar"];
+    "src/components/adcraft/simulation-cards" [label="simulation-cards"];
+    "src/components/adcraft/stats-row" [label="stats-row"];
+    "src/components/adcraft/str-briefing" [label="str-briefing"];
+    "src/components/adcraft/str-data-grid" [label="str-data-grid"];
+    "src/components/adcraft/str-review" [label="str-review"];
+    "src/components/adcraft/str-scoring" [label="str-scoring"];
+    "src/components/adcraft/str-triage-arena" [label="str-triage-arena"];
+    "src/components/adcraft/team-dashboard" [label="team-dashboard"];
+    "src/components/adcraft/xp-progress" [label="xp-progress"];
+  }
+
+  subgraph cluster_src_components_providers {
+    label="src/components/providers";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/components/providers/session-provider" [label="session-provider"];
+  }
+
+  subgraph cluster_src_components_ui {
+    label="src/components/ui";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/components/ui/avatar" [label="avatar"];
+    "src/components/ui/badge" [label="badge"];
+    "src/components/ui/button" [label="button"];
+    "src/components/ui/card" [label="card"];
+    "src/components/ui/input" [label="input"];
+    "src/components/ui/label" [label="label"];
+    "src/components/ui/progress" [label="progress"];
+    "src/components/ui/scroll-area" [label="scroll-area"];
+    "src/components/ui/select" [label="select"];
+    "src/components/ui/separator" [label="separator"];
+    "src/components/ui/slider" [label="slider"];
+    "src/components/ui/tabs" [label="tabs"];
+    "src/components/ui/toast" [label="toast"];
+    "src/components/ui/toaster" [label="toaster"];
+    "src/components/ui/tooltip" [label="tooltip"];
+  }
+
+  subgraph cluster_src_engine {
+    label="src/engine";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/engine/evaluation.test" [label="evaluation.test"];
+    "src/engine/evaluation" [label="evaluation"];
+    "src/engine/formulas.test" [label="formulas.test"];
+    "src/engine/formulas" [label="formulas"];
+    "src/engine/index" [label="index"];
+    "src/engine/mistake-analysis.test" [label="mistake-analysis.test"];
+    "src/engine/mistake-analysis" [label="mistake-analysis"];
+    "src/engine/simulation" [label="simulation"];
+    "src/engine/types" [label="types"];
+  }
+
+  subgraph cluster_src_hooks {
+    label="src/hooks";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/hooks/use-puter-chat" [label="use-puter-chat"];
+    "src/hooks/use-toast" [label="use-toast"];
+  }
+
+  subgraph cluster_src_lib {
+    label="src/lib";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/lib/auth-guard" [label="auth-guard"];
+    "src/lib/auth" [label="auth"];
+    "src/lib/db" [label="db"];
+    "src/lib/env" [label="env"];
+    "src/lib/logger" [label="logger"];
+    "src/lib/puter.d" [label="puter.d"];
+    "src/lib/rate-limit" [label="rate-limit"];
+    "src/lib/utils" [label="utils"];
+  }
+
+  subgraph cluster_src_stores {
+    label="src/stores";
+    style=filled;
+    fillcolor="#e8f4fd";
+    "src/stores/bid-elevator-store" [label="bid-elevator-store"];
+    "src/stores/campaign-builder-store" [label="campaign-builder-store"];
+    "src/stores/str-triage-store" [label="str-triage-store"];
+  }
+
+  "src/app/layout" -> "src/app/globals";
+  "src/app/actions/admin" -> "src/app/actions/types";
+  "src/app/actions/analytics" -> "src/app/actions/types";
+  "src/app/actions/certificate-lifecycle" -> "src/app/actions/events";
+  "src/app/actions/certificate-lifecycle" -> "src/app/actions/types";
+  "src/app/actions/certificate" -> "src/app/actions/types";
+  "src/app/actions/cheatsheet" -> "src/app/actions/types";
+  "src/app/actions/events" -> "src/app/actions/types";
+  "src/app/actions/leaderboard" -> "src/app/actions/types";
+  "src/app/actions/lesson" -> "src/app/actions/types";
+  "src/app/actions/mentor" -> "src/app/actions/events";
+  "src/app/actions/mistake-analysis" -> "src/app/actions/events";
+  "src/app/actions/mistake-analysis" -> "src/app/actions/types";
+  "src/app/actions/progress" -> "src/app/actions/events";
+  "src/app/actions/quiz" -> "src/app/actions/badge";
+  "src/app/actions/quiz" -> "src/app/actions/events";
+  "src/app/actions/simulation" -> "src/app/actions/events";
+  "src/app/actions/team" -> "src/app/actions/events";
+  "src/app/actions/team" -> "src/app/actions/types";
+  "src/components/adcraft/bid-elevator" -> "src/components/adcraft/bid-briefing";
+  "src/components/adcraft/bid-elevator" -> "src/components/adcraft/bid-arena";
+  "src/components/adcraft/bid-elevator" -> "src/components/adcraft/bid-scoring";
+  "src/components/adcraft/bid-elevator" -> "src/components/adcraft/bid-review";
+  "src/components/adcraft/campaign-builder" -> "src/components/adcraft/campaign-briefing";
+  "src/components/adcraft/campaign-builder" -> "src/components/adcraft/campaign-workshop";
+  "src/components/adcraft/campaign-builder" -> "src/components/adcraft/campaign-scoring";
+  "src/components/adcraft/campaign-builder" -> "src/components/adcraft/campaign-review";
+  "src/components/adcraft/dashboard" -> "src/components/adcraft/xp-progress";
+  "src/components/adcraft/dashboard" -> "src/components/adcraft/stats-row";
+  "src/components/adcraft/dashboard" -> "src/components/adcraft/module-cards";
+  "src/components/adcraft/dashboard" -> "src/components/adcraft/simulation-cards";
+  "src/components/adcraft/dashboard" -> "src/components/adcraft/sidebar";
+  "src/components/adcraft/str-triage-arena" -> "src/components/adcraft/str-briefing";
+  "src/components/adcraft/str-triage-arena" -> "src/components/adcraft/str-data-grid";
+  "src/components/adcraft/str-triage-arena" -> "src/components/adcraft/str-scoring";
+  "src/components/adcraft/str-triage-arena" -> "src/components/adcraft/str-review";
+  "src/engine/evaluation" -> "src/engine/formulas";
+  "src/stores/bid-elevator-store" -> "fixtures/bid-elevator-pack-1";
+  "src/stores/campaign-builder-store" -> "fixtures/campaign-builder-pack-1";
+  "src/stores/str-triage-store" -> "fixtures/str-triage-pack-1";
+}
